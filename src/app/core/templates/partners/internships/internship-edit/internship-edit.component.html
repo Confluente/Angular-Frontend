@@ -1,0 +1,133 @@
+<div class="container">
+    <form class="form-horizontal">
+        <header>
+            <h1>Edit internship</h1>
+        </header>
+
+        <fieldset class="section">
+            <legend class="h4 block">General Info</legend>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="internshipEdit-title" class="col-xs-12 col-sm-3 control-label">Title</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <input type="text" [(ngModel)]="internship.title" [ngModelOptions]="{standalone: true}" class="form-control" id="internshipEdit-title" required>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="internshipEdit-companyName" class="col-xs-12 col-sm-3 control-label">Company</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <select [(ngModel)]="internship.companyName" [ngModelOptions]="{standalone: true}" class="form-control" id="internshipEdit-companyName">
+                                <option *ngFor="let recipient of companies | keyvalue" [value]="recipient.key">{{recipient.key}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="internshipEdit-category" class="col-xs-12 col-sm-3 control-label">Category</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <input type="text" class="form-control" [value]="categories[0]" id="internshipEdit-category" [disabled]="true">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </fieldset>
+
+        <hr>
+
+        <fieldset class="section">
+            <legend class="h4 block">Details</legend>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="internshipEdit-email" class="col-xs-12 col-sm-3 control-label">Contact email</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <input type="text" [(ngModel)]="internship.contactEmail" [ngModelOptions]="{standalone: true}" class="form-control" id="internshipEdit-email">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="internshipEdit-link" class="col-xs-12 col-sm-3 control-label">Link to internship</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <input type="text" [(ngModel)]="internship.link" [ngModelOptions]="{standalone: true}" class="form-control" id="internshipEdit-link">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="internshipEdit-educationLevel" class="col-xs-12 col-sm-3 control-label">Education level</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <input type="text" [(ngModel)]="internship.educationLevel" [ngModelOptions]="{standalone: true}" class="form-control" id="internshipEdit-educationLevel">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="internshipEdit-description" class="col-xs-12 col-sm-3 control-label">Full Description</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <textarea [(ngModel)]="internship.description" [ngModelOptions]="{standalone: true}" class="form-control" style="height:300px"
+                                      id="internshipEdit-description"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+                <p class="hidden-sm col-xs-12 col-md-4 control-label text-left small">
+                    You can make the description real fancy using <b>markdown</b>! For an overview of how markdown
+                    works (adding quotes, links, images and much much more) check <a
+                    href="https://www.markdownguide.org/basic-syntax/">this link</a>!
+                </p>
+
+            </div>
+        </fieldset>
+
+        <button type="submit" class="btn btn-primary" (click)="submit()" [disabled]="loading">Edit internship</button>
+
+    </form>
+</div>

@@ -56,6 +56,11 @@ import { UserDeleteComponent } from './core/templates/users/user-delete/user-del
 import { GroupDeleteComponent } from './core/templates/groups/group-delete/group-delete.component';
 import { ActivityDeleteComponent } from './core/templates/activities/activity-delete/activity-delete.component';
 import { ChangePasswordComponent } from './core/templates/users/change-password/change-password.component';
+import { InternshipCreateComponent } from './core/templates/partners/internships/internship-create/internship-create.component';
+import { InternshipEditComponent } from './core/templates/partners/internships/internship-edit/internship-edit.component';
+import { InternshipDetailsComponent } from './core/templates/partners/internships/internship-details/internship-details.component';
+import { InternshipDeleteComponent } from './core/templates/partners/internships/internship-delete/internship-delete.component';
+import { InternshipOverviewComponent } from './core/templates/partners/internships/internship-overview/internship-overview.component';
 
 @NgModule({
     declarations: [
@@ -107,6 +112,11 @@ import { ChangePasswordComponent } from './core/templates/users/change-password/
         GroupDeleteComponent,
         ActivityDeleteComponent,
         ChangePasswordComponent,
+        InternshipCreateComponent,
+        InternshipEditComponent,
+        InternshipDetailsComponent,
+        InternshipDeleteComponent,
+        InternshipOverviewComponent,
     ],
     imports: [
         BrowserModule,

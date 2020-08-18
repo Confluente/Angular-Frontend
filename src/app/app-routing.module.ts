@@ -53,28 +53,48 @@ import {UserDeleteComponent} from "./core/templates/users/user-delete/user-delet
 import {GroupDeleteComponent} from "./core/templates/groups/group-delete/group-delete.component";
 import {ActivityDeleteComponent} from "./core/templates/activities/activity-delete/activity-delete.component";
 import {ChangePasswordComponent} from "./core/templates/users/change-password/change-password.component";
+import {InternshipOverviewComponent} from "./core/templates/partners/internships/internship-overview/internship-overview.component";
+import {AllInternshipsResolverService} from "./core/services/partners/all-internships-resolver.service";
+import {InternshipDetailsComponent} from "./core/templates/partners/internships/internship-details/internship-details.component";
+import {SpecificInternshipResolverService} from "./core/services/partners/specific-internship-resolver.service";
+import {InternshipCreateComponent} from "./core/templates/partners/internships/internship-create/internship-create.component";
+import {InternshipEditComponent} from "./core/templates/partners/internships/internship-edit/internship-edit.component";
+import {InternshipDeleteComponent} from "./core/templates/partners/internships/internship-delete/internship-delete.component";
 
 const routes: Routes = [
     {path: 'login', component: LoginComponent},
-    {path: 'manage', component: ManageComponent,
+    {
+        path: 'manage',
+        component: ManageComponent,
         resolve: {
             allActivities: AllActivitiesManageResolverService,
             allUsers: AllUsersResolverService,
             allGroups: AllGroupsResolverService,
-        }},
+        }
+    },
 
     // Activities
-    {path: 'activities_overview', component: ActivityOverviewComponent,
-        resolve: {activities: AllActivitiesResolverService}},
-    {path: 'activities/:activityId', component: ActivityDetailsComponent,
+    {
+        path: 'activities_overview',
+        component: ActivityOverviewComponent,
+        resolve: {activities: AllActivitiesResolverService}
+    },
+    {
+        path: 'activities/:activityId',
+        component: ActivityDetailsComponent,
         resolve: {
             activity: SpecificActivityResolverService,
-        }},
+        }
+    },
     {path: 'manage/activities/create', component: ActivityCreateComponent},
-    {path: 'manage/activities/edit/:activityId', component: ActivityEditComponent,
+    {
+        path: 'manage/activities/edit/:activityId',
+        component: ActivityEditComponent,
         resolve: {activity: SpecificActivityResolverService}
     },
-    {path: 'manage/activities/delete/:activityId', component: ActivityDeleteComponent,
+    {
+        path: 'manage/activities/delete/:activityId',
+        component: ActivityDeleteComponent,
         resolve: {activity: SpecificActivityResolverService}
     },
 
@@ -82,28 +102,61 @@ const routes: Routes = [
     {path: 'user/profile', component: UserDetailsComponent},
     {path: 'user/:userId', component: UserDetailsComponent, resolve: {user: SpecificUserResolverService}},
     {path: 'register_new_member', component: UserCreateComponent},
-    {path: 'manage/users/edit/:userId', component: UserEditComponent,
+    {
+        path: 'manage/users/edit/:userId',
+        component: UserEditComponent,
         resolve: {
             user: SpecificUserResolverService,
             allGroups: AllGroupsResolverService
-    }},
-    {path: 'manage/users/delete/:userId', component: UserDeleteComponent,
+        }
+    },
+    {
+        path: 'manage/users/delete/:userId',
+        component: UserDeleteComponent,
         resolve: {user: SpecificUserResolverService}
     },
-    {path: 'manage/users/change_password/:userId', component: ChangePasswordComponent,
+    {
+        path: 'manage/users/change_password/:userId',
+        component: ChangePasswordComponent,
         resolve: {user: SpecificUserResolverService}
     },
 
     // Groups
     {path: 'manage/groups/create', component: GroupCreateComponent},
-    {path: 'manage/groups/edit/:groupId', component: GroupEditComponent,
+    {
+        path: 'manage/groups/edit/:groupId',
+        component: GroupEditComponent,
         resolve: {
             group: SpecificGroupResolverService,
             allUsers: AllUsersResolverService,
-    }},
+        }
+    },
     {path: 'group/:groupId', component: GroupDetailsComponent, resolve: {group: SpecificGroupResolverService}},
-    {path: 'manage/groups/delete/:groupId', component: GroupDeleteComponent,
+    {
+        path: 'manage/groups/delete/:groupId', component: GroupDeleteComponent,
         resolve: {group: SpecificGroupResolverService}
+    },
+
+    // Internships
+    {
+        path: 'partners/internships', component: InternshipOverviewComponent, resolve:
+            {allInternships: AllInternshipsResolverService}
+    },
+    {
+        path: 'partners/internships/:internshipId',
+        component: InternshipDetailsComponent,
+        resolve: {internship: SpecificInternshipResolverService}
+    },
+    {path: 'manage/partners/internships/create', component: InternshipCreateComponent},
+    {
+        path: 'manage/partners/internships/edit/:internshipId',
+        component: InternshipEditComponent,
+        resolve: {internship: SpecificInternshipResolverService}
+    },
+    {
+        path: 'manage/partners/internships/delete/:internshipId',
+        component: InternshipDeleteComponent,
+        resolve: {internship: SpecificInternshipResolverService}
     },
 
     // Pages
@@ -117,10 +170,14 @@ const routes: Routes = [
     {path: 'education/honors_master', component: HonorsMasterComponent},
     {path: 'education/student_council', component: StudentCouncilComponent},
     {path: 'education/tracks/artificial_intelligence', component: ArtificialIntelligenceComponent},
-    {path: 'education/tracks/competitive_programming_and_problem_solving',
-        component: CompetitiveProgrammingAndProblemSolvingComponent},
-    {path: 'education/tracks/empowerment_for_healthcare_and_wellbeing',
-        component: EmpowermentForHealthcareAndWellbeingComponent},
+    {
+        path: 'education/tracks/competitive_programming_and_problem_solving',
+        component: CompetitiveProgrammingAndProblemSolvingComponent
+    },
+    {
+        path: 'education/tracks/empowerment_for_healthcare_and_wellbeing',
+        component: EmpowermentForHealthcareAndWellbeingComponent
+    },
     {path: 'education/tracks/energy_transition', component: EnergyTransitionComponent},
     {path: 'education/tracks/high_tech_systems', component: HighTechSystemsComponent},
     {path: 'education/tracks/sensus', component: SensusComponent},
