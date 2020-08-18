@@ -67,7 +67,7 @@
                             by</label>
                         <div class="col-xs-12 col-sm-10 col-md-7">
                             <select [(ngModel)]="organizer" [ngModelOptions]="{standalone: true}" class="form-control" id="activityCreate-organize">
-                                <option *ngFor="let group of user.groups" [value]="group.id">{{group.displayName}}
+                                <option *ngFor="let group of user.groups" [value]="group.id">{{group.fullName}}
                                 </option>
                             </select>
                         </div>

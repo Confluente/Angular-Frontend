@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {ActivatedRoute} from "@angular/router";
 import {ActivitiesService} from "../../services/activities/activities.service";
+import {FilterPipe} from "../../pipes/filter.pipe";
+import {SortPipe} from "../../pipes/sort.pipe";
 
 @Component({
     selector: 'app-manage',
@@ -12,22 +14,24 @@ export class ManageComponent implements OnInit {
 
     user: any;
     loading: boolean;
-    f: { date: Date };
-    private archive: any[];
+    date = new Date().setDate((new Date()).getDate() - 1);
+    archive: any[];
     users: any[];
     groups: any[];
     activities: any[];
 
-    sortTypeActivities: string;
-    sortReverseActivities: boolean;
-    searchQueryActivities: string;
+    sortTypeActivities = 'id';
+    sortReverseActivities = false;
+    searchQueryActivities = "";
+    sortCallbackActivities: any;
 
-    sortTypeUsers: string;
-    sortReverseUsers: boolean;
-    searchQueryUsers: string;
-    sortTypeGroups: string;
-    sortReverseGroups: boolean;
-    searchQueryGroups: string;
+    sortTypeUsers = 'id';
+    sortReverseUsers = false;
+    searchQueryUsers = "";
+
+    sortTypeGroups = 'id';
+    sortReverseGroups = false;
+    searchQueryGroups = "";
 
     private datepicker: { open: boolean };
 
@@ -38,28 +42,38 @@ export class ManageComponent implements OnInit {
         startingDay: 1
     };
 
+    typeSortMap = new Map([
+        ['id', this.sortPipe.numberSort],
+        ['name', this.sortPipe.lexicographicSort],
+        ['date', this.sortPipe.dateSort],
+        ['Organizer.displayName', this.sortPipe.lexicographicSort],
+        ['published', this.sortPipe.booleanSort],
+        ['displayName', this.sortPipe.lexicographicSort],
+        ['email', this.sortPipe.lexicographicSort],
+        ['isAdmin', this.sortPipe.booleanSort],
+        ['fullName', this.sortPipe.lexicographicSort],
+        ['email', this.sortPipe.lexicographicSort],
+        ['canOrganize', this.sortPipe.booleanSort]
+    ]);
+
     constructor(private activatedRoute: ActivatedRoute,
                 public authService: AuthService,
-                private activitiesService: ActivitiesService) {
+                private activitiesService: ActivitiesService,
+                public filterPipe: FilterPipe,
+                public sortPipe: SortPipe) {
         this.loading = true;
-        this.f = {
-            date: new Date()
-        };
 
         // Variables for tracking search & sorting in activities tab
         this.sortTypeActivities = 'id';
         this.sortReverseActivities = false;
-        this.searchQueryActivities = '';
 
         // Variables for tracking search & sorting in users tab
         this.sortTypeUsers = 'id';
         this.sortReverseUsers = false;
-        this.searchQueryUsers = '';
 
         // Variables for tracking search & sorting in groups tab
         this.sortTypeGroups = 'id';
         this.sortReverseGroups = false;
-        this.searchQueryGroups = '';
 
         this.datepicker = {open: false};
     }
@@ -75,8 +89,6 @@ export class ManageComponent implements OnInit {
                 this.groups = this.activatedRoute.snapshot.data.allGroups;
             }
 
-            this.filter();
-
             this.loading = false;
         });
     }
@@ -90,19 +102,23 @@ export class ManageComponent implements OnInit {
         });
     }
 
-    // $scope.$watch("f.date", function (newDate) {
-    //     $scope.filter();
-    // });
+    activityCallback(activity, query) {
+        return activity.Organizer.displayName.toLowerCase().includes(query.toLowerCase())
+            || activity.name.toLowerCase().includes(query.toLowerCase());
+    }
 
-    filter() {
-        const date = this.f.date;
-        date.setDate(date.getDate() - 1);
-        this.activities = [];
-        for (const activity of this.archive) {
-            if (activity.date >= date) {
-                this.activities.push(activity);
-            }
-        }
+    activityDateFilter(activity, query) {
+        return activity.date.getTime() >= new Date(query).getTime();
+    }
+
+    userCallback(user, query) {
+        return user.email.toLowerCase().includes(query.toLowerCase())
+            || user.displayName.toLowerCase().includes(query.toLowerCase());
+    }
+
+    groupCallback(group, query) {
+        return group.fullName.toLowerCase().includes(query.toLowerCase())
+            || group.email.toLowerCase().includes(query.toLowerCase());
     }
 
     // Ugly repeated code
@@ -131,10 +147,5 @@ export class ManageComponent implements OnInit {
             this.sortReverseGroups = false;
         }
         this.sortTypeGroups = type;
-    }
-
-    // function for using datepicker in form for creating activities
-    openDatePicker() {
-        this.datepicker.open = true;
     }
 }

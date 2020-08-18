@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-association',
-  templateUrl: './association.component.html',
-  styleUrls: ['./association.component.css']
+    selector: 'app-association',
+    templateUrl: './association.component.html',
+    styleUrls: ['./association.component.css']
 })
 export class AssociationComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+    }
 
-  ngOnInit(): void {
-  }
-
+    ngOnInit(): void {
+    }
 }

@@ -50,10 +50,11 @@
             <label>Users in group</label>
             <div>
 <!--                TODO IMPLEMENT SEARCH QUERY-->
-                <input type="text" class="form-control" placeholder="Search users in group">
+                <input type="text" class="form-control" placeholder="Search users in group" [(ngModel)]="searchQueryUsersInGroup" [ngModelOptions]="{standalone: true}">
+<!--                <input type="text" class="form-control" placeholder="Search users in group">-->
             </div>
             <div style="overflow: auto; height: 200px; border: 1px solid black; padding: 5px">
-                <div *ngFor="let user of userGroup; index as i" style="margin: 1px">
+                <div *ngFor="let user of (userGroup | filterPipe: userCallbackFilter :searchQueryUsersInGroup); index as i; " style="margin: 1px">
                     <button (click)="removeUserFromGroup(user, i)">-</button>
                     {{user.name}}
                     <select [(ngModel)]="user.func" [ngModelOptions]="{standalone: true}">
@@ -67,11 +68,11 @@
             <label>Users not in group</label>
             <div>
                 <!--                TODO IMPLEMENT SEARCH QUERY-->
-<!--                <input type="text" class="form-control" placeholder="Search users not in group" [(ngModel)]="searchQueryUsersNotInGroup" [ngModelOptions]="{standalone: true}">-->
-                <input type="text" class="form-control" placeholder="Search users not in group">
+                <input type="text" class="form-control" placeholder="Search users not in group"
+                       [(ngModel)]="searchQueryUsersNotInGroup" [ngModelOptions]="{standalone: true}">
             </div>
             <div style="overflow: auto; height: 200px; border: 1px solid black; padding: 5px">
-                <div *ngFor="let user of usersNotInGroup; index as i" style="margin: 1px">
+                <div *ngFor="let user of (usersNotInGroup | filterPipe: userCallbackFilter: searchQueryUsersNotInGroup); index as i" style="margin: 1px">
                     <button (click)="addUserToGroup(user, i)">+</button>
                     {{user.name}}
                 </div>

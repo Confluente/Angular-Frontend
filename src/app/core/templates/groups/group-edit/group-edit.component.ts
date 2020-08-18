@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {GroupsService} from "../../../services/groups/groups.service";
+import {FilterPipe} from "../../../pipes/filter.pipe";
 
 @Component({
     selector: 'app-group-edit',
@@ -18,11 +19,14 @@ export class GroupEditComponent implements OnInit {
 
     group;
     private allUsers;
+    searchQueryUsersNotInGroup = "";
+    searchQueryUsersInGroup = "";
 
     loading: boolean;
 
     constructor(private activatedRoute: ActivatedRoute,
-                private groupsService: GroupsService) {
+                private groupsService: GroupsService,
+                private filterPipe: FilterPipe) {
         this.loading = true;
     }
 
@@ -70,6 +74,10 @@ export class GroupEditComponent implements OnInit {
         this.userGroup.splice(index, 1);
         this.usersNotInGroup.sort(this.compare);
         this.userGroup.sort(this.compare);
+    }
+
+    userCallbackFilter(user, query) {
+        return (user as any).name.toLowerCase().includes(query.toLowerCase());
     }
 
     submit() {

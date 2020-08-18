@@ -61,6 +61,8 @@ import { InternshipEditComponent } from './core/templates/partners/internships/i
 import { InternshipDetailsComponent } from './core/templates/partners/internships/internship-details/internship-details.component';
 import { InternshipDeleteComponent } from './core/templates/partners/internships/internship-delete/internship-delete.component';
 import { InternshipOverviewComponent } from './core/templates/partners/internships/internship-overview/internship-overview.component';
+import { FilterPipe } from './core/pipes/filter.pipe';
+import { SortPipe } from './core/pipes/sort.pipe';
 
 @NgModule({
     declarations: [
@@ -117,6 +119,8 @@ import { InternshipOverviewComponent } from './core/templates/partners/internshi
         InternshipDetailsComponent,
         InternshipDeleteComponent,
         InternshipOverviewComponent,
+        FilterPipe,
+        SortPipe,
     ],
     imports: [
         BrowserModule,
@@ -128,8 +132,10 @@ import { InternshipOverviewComponent } from './core/templates/partners/internshi
         CookieService,
         AuthService,
         AuthResolverService,
+        FilterPipe,
+        SortPipe
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppModule {
 }

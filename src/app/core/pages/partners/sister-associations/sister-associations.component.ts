@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-sister-associations',
-  templateUrl: './sister-associations.component.html',
-  styleUrls: ['./sister-associations.component.css']
+    selector: 'app-sister-associations',
+    templateUrl: './sister-associations.component.html',
+    styleUrls: ['./sister-associations.component.css']
 })
 export class SisterAssociationsComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
 }

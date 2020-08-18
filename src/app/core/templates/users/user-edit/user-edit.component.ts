@@ -85,8 +85,6 @@ export class UserEditComponent implements OnInit {
                 });
             }
         }
-
-        console.log(this.groupSelection);
     }
 
     // Function to find the user_group of one of the groups that the user is a member of

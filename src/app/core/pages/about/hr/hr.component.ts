@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-hr',
-  templateUrl: './hr.component.html',
-  styleUrls: ['./hr.component.css']
+    selector: 'app-hr',
+    templateUrl: './hr.component.html',
+    styleUrls: ['./hr.component.css']
 })
 export class HRComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
 }

@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-submitted-registration',
-  templateUrl: './submitted-registration.component.html',
-  styleUrls: ['./submitted-registration.component.css']
+    selector: 'app-submitted-registration',
+    templateUrl: './submitted-registration.component.html',
+    styleUrls: ['./submitted-registration.component.css']
 })
 export class SubmittedRegistrationComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
 }

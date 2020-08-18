@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-energy-transition',
-  templateUrl: './energy-transition.component.html',
-  styleUrls: ['./energy-transition.component.css']
+    selector: 'app-energy-transition',
+    templateUrl: './energy-transition.component.html',
+    styleUrls: ['./energy-transition.component.css']
 })
 export class EnergyTransitionComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
 }
