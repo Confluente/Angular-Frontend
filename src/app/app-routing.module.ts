@@ -60,6 +60,7 @@ import {SpecificInternshipResolverService} from "./core/services/partners/specif
 import {InternshipCreateComponent} from "./core/templates/partners/internships/internship-create/internship-create.component";
 import {InternshipEditComponent} from "./core/templates/partners/internships/internship-edit/internship-edit.component";
 import {InternshipDeleteComponent} from "./core/templates/partners/internships/internship-delete/internship-delete.component";
+import {CurrentUserResolverService} from "./core/services/users/current-user-resolver.service";
 
 const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -71,6 +72,7 @@ const routes: Routes = [
             allUsers: AllUsersResolverService,
             allGroups: AllGroupsResolverService,
             allInternships: AllInternshipsResolverService,
+            currentUser: CurrentUserResolverService
         }
     },
 

@@ -88,30 +88,30 @@ export class ManageComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.authService.user.subscribe(user => {
-            this.user = user;
+        this.user = this.activatedRoute.snapshot.data.currentUser;
 
-            if (!this.user.loggedIn) { return; }
+        if (!this.user.loggedIn) {
+            return;
+        }
 
-            this.archive = this.activatedRoute.snapshot.data.allActivities;
+        this.archive = this.activatedRoute.snapshot.data.allActivities;
 
-            if (this.user.isAdmin) {
-                this.users = this.activatedRoute.snapshot.data.allUsers;
-                this.groups = this.activatedRoute.snapshot.data.allGroups;
+        if (this.user.isAdmin) {
+            this.users = this.activatedRoute.snapshot.data.allUsers;
+            this.groups = this.activatedRoute.snapshot.data.allGroups;
+        }
+
+        for (const group of this.user.groups) {
+            if (group.email === "acquisition@hsaconfluente.nl") {
+                this.isUserInAcquisition = true;
             }
+        }
 
-            for (const group of this.user.groups) {
-                if (group.email === "acquisition@hsaconfluente.nl") {
-                    this.isUserInAcquisition = true;
-                }
-            }
+        if (this.isUserInAcquisition || this.user.isAdmin) {
+            this.internships = this.activatedRoute.snapshot.data.allInternships;
+        }
 
-            if (this.isUserInAcquisition || this.user.isAdmin) {
-                this.internships = this.activatedRoute.snapshot.data.allInternships;
-            }
-
-            this.loading = false;
-        });
+        this.loading = false;
     }
 
     // Allow toggling the 'published' attribute of activities
