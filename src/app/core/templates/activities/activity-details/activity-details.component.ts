@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {AuthService} from "../../../services/auth.service";
 import {ActivitiesService} from "../../../services/activities/activities.service";
 import {TableExport} from "tableexport";
 
@@ -24,16 +23,13 @@ export class ActivityDetailsComponent implements OnInit {
     clickedExport: boolean;
 
     constructor(private activatedRoute: ActivatedRoute,
-                public authService: AuthService,
                 private activitiesService: ActivitiesService) {
         this.loading = true;
         this.activityId = this.activatedRoute.snapshot.params.activityId;
     }
 
     ngOnInit(): void {
-        this.authService.user.subscribe(user => {
-            this.user = user;
-        });
+        this.user = this.activatedRoute.snapshot.data.currentUser;
 
         this.activity = this.activatedRoute.snapshot.data.activity;
 

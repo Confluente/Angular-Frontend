@@ -48,8 +48,8 @@
             </tr>
         </table>
     </div>
-    <h4 *ngIf="groups.length > 0">Groups</h4>
-    <p *ngFor="let group of groups"><a href="/group/{{group.id}}">{{group.fullName}}</a> <b>({{group.members[0].user_group.func}})</b></p>
+    <h4 *ngIf="user.groups.length > 0">Groups</h4>
+    <p *ngFor="let group of user.groups"><a href="/group/{{group.id}}">{{group.fullName}}</a> <b>({{group.members[0].user_group.func}})</b></p>
     <h4>Personal settings</h4>
     <p><a href="manage/users/change_password/{{user.id}}">Change password</a></p>
 </div>

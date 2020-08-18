@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-login',
@@ -12,14 +13,13 @@ export class LoginComponent implements OnInit {
     public loading: boolean;
     user: any;
 
-    constructor(private authService: AuthService) {
+    constructor(private authService: AuthService,
+                private activatedRoute: ActivatedRoute) {
         this.loading = true;
     }
 
     ngOnInit(): void {
-        this.authService.user.subscribe(user => {
-            this.user = user;
-        });
+        this.user = this.activatedRoute.snapshot.data.currentUser;
 
         this.loading = false;
     }

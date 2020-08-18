@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {AuthService} from "../../../../services/auth.service";
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
@@ -16,25 +15,25 @@ export class InternshipDetailsComponent implements OnInit {
     isUserInAcquisition = false;
 
     constructor(private activatedRoute: ActivatedRoute,
-                private authService: AuthService,
                 private sanitizer: DomSanitizer) {
         this.loading = true;
     }
 
     ngOnInit(): void {
         this.internship = this.activatedRoute.snapshot.data.internship;
+
         this.internship.link = this.sanitizer.bypassSecurityTrustUrl(this.internship.link);
 
-        this.authService.user.subscribe(user => {
-            this.user = user;
+        this.user = this.activatedRoute.snapshot.data.currentUser;
 
-            if (!this.user.loggedIn) { return; }
+        if (!this.user.loggedIn) {
+            return;
+        }
 
-            for (const group of this.user.groups) {
-                if (group.email === "acquisition@hsaconfluente.nl") {
-                    this.isUserInAcquisition = true;
-                }
+        for (const group of this.user.groups) {
+            if (group.email === "acquisition@hsaconfluente.nl") {
+                this.isUserInAcquisition = true;
             }
-        });
+        }
     }
 }

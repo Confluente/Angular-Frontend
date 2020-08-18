@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../services/auth.service";
 import {ActivatedRoute} from "@angular/router";
 import {ActivitiesService} from "../../services/activities/activities.service";
 import {FilterPipe} from "../../pipes/filter.pipe";
@@ -66,7 +65,6 @@ export class ManageComponent implements OnInit {
     ]);
 
     constructor(private activatedRoute: ActivatedRoute,
-                public authService: AuthService,
                 private activitiesService: ActivitiesService,
                 public filterPipe: FilterPipe,
                 public sortPipe: SortPipe) {

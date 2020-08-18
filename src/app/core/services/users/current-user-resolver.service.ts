@@ -3,7 +3,7 @@ import {UsersService} from "./users.service";
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
 import {Observable, of} from "rxjs";
 import {WebRequestService} from "../web-request.service";
-import {catchError, mergeMap} from "rxjs/operators";
+import {catchError, first, mergeMap, take} from "rxjs/operators";
 import {HttpResponse} from "@angular/common/http";
 
 @Injectable({
@@ -22,7 +22,7 @@ export class CurrentUserResolverService implements Resolve<any> {
                 return of({loggedIn: false, groups: null});
             }),
             mergeMap((result: HttpResponse<any>) => {
-                return this.usersService.get(result.body.id);
+                return this.usersService.get(result.body.id).pipe(first());
             })
         );
     }

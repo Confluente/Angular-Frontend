@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {AuthService} from "../../../services/auth.service";
 
 @Component({
     selector: 'app-user-details',
@@ -10,23 +9,17 @@ import {AuthService} from "../../../services/auth.service";
 export class UserDetailsComponent implements OnInit {
 
     user: any;
-    groups: any;
     loading: boolean;
 
-    constructor(private activatedRoute: ActivatedRoute,
-                private authService: AuthService) {
+    constructor(private activatedRoute: ActivatedRoute) {
         this.loading = true;
     }
 
     ngOnInit(): void {
         if (this.activatedRoute.snapshot.routeConfig.path === "user/profile") {
-            this.authService.user.subscribe(user => {
-                this.user = user;
-                this.groups = user.groups;
-            });
+            this.user = this.activatedRoute.snapshot.data.currentUser;
         } else {
             this.user = this.activatedRoute.snapshot.data.user;
-            this.groups = this.user.groups;
         }
         this.loading = false;
     }

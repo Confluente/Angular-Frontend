@@ -37,6 +37,7 @@ export class UsersService {
             map((res: HttpResponse<any>) => {
                 const user = res.body[0];
                 user.groups = res.body[1];
+                user.loggedIn = true;
 
                 for (const group of user.groups) {
                     if (group.canOrganize) {

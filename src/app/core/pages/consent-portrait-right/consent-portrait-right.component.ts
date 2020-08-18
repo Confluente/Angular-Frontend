@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NotificationsService} from "../../services/notifications/notifications.service";
-import {AuthService} from "../../services/auth.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-consent-portrait-right',
@@ -12,13 +12,11 @@ export class ConsentPortraitRightComponent implements OnInit {
     private user;
 
     constructor(private notificationsService: NotificationsService,
-                private authService: AuthService) {
+                private activatedRoute: ActivatedRoute) {
     }
 
     ngOnInit(): void {
-        this.authService.user.subscribe(user => {
-            this.user = user;
-        });
+        this.user = this.activatedRoute.snapshot.data.currentUser;
     }
 
     submit() {

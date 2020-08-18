@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ActivitiesService} from "../../../services/activities/activities.service";
-import {AuthService} from "../../../services/auth.service";
 
 @Component({
     selector: 'app-activity-edit',
@@ -38,7 +37,6 @@ export class ActivityEditComponent implements OnInit {
     types = ["☰ text", "◉ multiple choice", "☑ checkboxes"];
 
     constructor(private activatedRoute: ActivatedRoute,
-                private authService: AuthService,
                 private activitiesService: ActivitiesService) {
         this.loading = true;
     }
@@ -47,9 +45,7 @@ export class ActivityEditComponent implements OnInit {
         this.activity = this.activatedRoute.snapshot.data.activity;
         this.activity.organizer = this.activity.Organizer.displayName;
 
-        this.authService.user.subscribe(user => {
-            this.user = user;
-        });
+        this.user = this.activatedRoute.snapshot.data.currentUser;
 
         for (const group of this.user.groups) {
             this.userGroups.push(group.displayName);

@@ -63,6 +63,7 @@ import { InternshipOverviewComponent } from './core/templates/partners/internshi
 import { FilterPipe } from './core/pipes/filter.pipe';
 import { SortPipe } from './core/pipes/sort.pipe';
 import { MarkdownComponent } from './core/snippets/markdown/markdown.component';
+import { BaseComponent } from './core/base/base.component';
 
 @NgModule({
     declarations: [
@@ -122,6 +123,7 @@ import { MarkdownComponent } from './core/snippets/markdown/markdown.component';
         FilterPipe,
         SortPipe,
         MarkdownComponent,
+        BaseComponent,
     ],
     imports: [
         BrowserModule,
