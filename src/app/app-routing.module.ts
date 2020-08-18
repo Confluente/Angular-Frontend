@@ -70,6 +70,7 @@ const routes: Routes = [
             allActivities: AllActivitiesManageResolverService,
             allUsers: AllUsersResolverService,
             allGroups: AllGroupsResolverService,
+            allInternships: AllInternshipsResolverService,
         }
     },
 

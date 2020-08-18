@@ -11,7 +11,6 @@ import {CookieService} from "ngx-cookie-service";
 import { LoginComponent } from './core/pages/login/login.component';
 import { HomeComponent } from './core/pages/home/home.component';
 import {FormsModule} from "@angular/forms";
-import {AuthService} from "./core/services/auth.service";
 import { AlumniComponent } from './core/pages/about/alumni/alumni.component';
 import { AssociationComponent } from './core/pages/about/association/association.component';
 import { CommitteesComponent } from './core/pages/about/committees/committees.component';
@@ -63,6 +62,7 @@ import { InternshipDeleteComponent } from './core/templates/partners/internships
 import { InternshipOverviewComponent } from './core/templates/partners/internships/internship-overview/internship-overview.component';
 import { FilterPipe } from './core/pipes/filter.pipe';
 import { SortPipe } from './core/pipes/sort.pipe';
+import { MarkdownComponent } from './core/snippets/markdown/markdown.component';
 
 @NgModule({
     declarations: [
@@ -121,6 +121,7 @@ import { SortPipe } from './core/pipes/sort.pipe';
         InternshipOverviewComponent,
         FilterPipe,
         SortPipe,
+        MarkdownComponent,
     ],
     imports: [
         BrowserModule,
@@ -130,7 +131,6 @@ import { SortPipe } from './core/pipes/sort.pipe';
     ],
     providers: [
         CookieService,
-        AuthService,
         AuthResolverService,
         FilterPipe,
         SortPipe

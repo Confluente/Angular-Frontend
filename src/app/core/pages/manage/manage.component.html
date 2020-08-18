@@ -1,14 +1,17 @@
 <div class="container">
     <div class="pull-right">
 
-        <div class="btn-group" role="group">
-            <a class="btn btn-default" href="manage/activities/create" *ngIf="user.canOrganize">+ Activity</a>
+        <div class="btn-group" role="group" *ngIf="user.canOrganize">
+            <a class="btn btn-default" href="manage/activities/create">+ Activity</a>
         </div>
-        <div class="btn-group" role="group">
-            <a class="btn btn-default" href="register_new_member" *ngIf="user.isAdmin">+ User</a>
+        <div class="btn-group" role="group" *ngIf="user.isAdmin">
+            <a class="btn btn-default" href="register_new_member">+ User</a>
         </div>
-        <div class="btn-group" role="group">
-            <a class="btn btn-default" href="manage/groups/create" *ngIf="user.isAdmin">+ Group</a>
+        <div class="btn-group" role="group" *ngIf="user.isAdmin">
+            <a class="btn btn-default" href="manage/groups/create">+ Group</a>
+        </div>
+        <div class="btn-group" role="group" *ngIf="user.isAdmin || isUserInAcquisition">
+            <a class="btn btn-default" href="manage/partners/internships/create">+ Internship</a>
         </div>
     </div>
 
@@ -17,17 +20,22 @@
 
     <div id="managePage">
 
-        <ul  class="nav nav-pills">
-            <li class="active">
-                <a  href="#activities" data-toggle="tab">Activities</a>
+        <ul class="nav nav-pills">
+            <li class="active" *ngIf="user.canOrganize">
+                <a href="#activities" data-toggle="tab">Activities</a>
             </li>
-            <li><a href="#users" data-toggle="tab">Users</a>
+            <li *ngIf="user.isAdmin">
+                <a href="#users" data-toggle="tab">Users</a>
             </li>
-            <li><a href="#groups" data-toggle="tab">Groups</a>
+            <li *ngIf="user.isAdmin">
+                <a href="#groups" data-toggle="tab">Groups</a>
+            </li>
+            <li *ngIf="user.isAdmin || isUserInAcquisition">
+                <a href="#internships" data-toggle="tab">Internships</a>
             </li>
         </ul>
         <div class="tab-content clearfix">
-            <div class="tab-pane active" id="activities">
+            <div class="tab-pane active" id="activities" *ngIf="user.canOrganize">
                 <div class="row section manage-actions">
                     <div class="col-xs-12 col-sm-6 col-md-3 col-md-offset-6">
                         <div class="input-group">
@@ -36,7 +44,8 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-3">
-                        <input type="text" class="form-control" placeholder="Search activities" [(ngModel)]="searchQueryActivities">
+                        <input type="text" class="form-control" placeholder="Search activities"
+                               [(ngModel)]="searchQueryActivities">
                     </div>
                 </div>
 
@@ -46,16 +55,32 @@
 
                             <thead>
                             <tr>
-                                <th class="col-xs-5" (click)="sortActivities('name')">Title<i *ngIf="(sortTypeActivities == 'name') && sortReverseActivities" class="fa fa-angle-down"></i><i *ngIf="(sortTypeActivities == 'name') && !sortReverseActivities" class="fa fa-angle-up"></i></th>
-                                <th class="col-xs-2" (click)="sortActivities('date')">Date<i *ngIf="(sortTypeActivities == 'date') && sortReverseActivities" class="fa fa-angle-down"></i><i *ngIf="(sortTypeActivities == 'date') && !sortReverseActivities" class="fa fa-angle-up"></i></th>
-                                <th class="col-xs-2" (click)="sortActivities('Organizer.displayName')">Organizer<i *ngIf="(sortTypeActivities == 'Organizer.displayName') && sortReverseActivities" class="fa fa-angle-down"></i><i *ngIf="(sortTypeActivities == 'Organizer.displayName') && !sortReverseActivities" class="fa fa-angle-up"></i></th>
-                                <th class="col-xs-1" (click)="sortActivities('published')">Published<i *ngIf="(sortTypeActivities == 'published') && sortReverseActivities" class="fa fa-angle-down"></i><i *ngIf="(sortTypeActivities == 'published') && !sortReverseActivities" class="fa fa-angle-up"></i></th>
+                                <th class="col-xs-5" (click)="sortActivities('name')">Title<i
+                                    *ngIf="(sortTypeActivities == 'name') && sortReverseActivities"
+                                    class="fa fa-angle-down"></i><i
+                                    *ngIf="(sortTypeActivities == 'name') && !sortReverseActivities"
+                                    class="fa fa-angle-up"></i></th>
+                                <th class="col-xs-2" (click)="sortActivities('date')">Date<i
+                                    *ngIf="(sortTypeActivities == 'date') && sortReverseActivities"
+                                    class="fa fa-angle-down"></i><i
+                                    *ngIf="(sortTypeActivities == 'date') && !sortReverseActivities"
+                                    class="fa fa-angle-up"></i></th>
+                                <th class="col-xs-2" (click)="sortActivities('Organizer.displayName')">Organizer<i
+                                    *ngIf="(sortTypeActivities == 'Organizer.displayName') && sortReverseActivities"
+                                    class="fa fa-angle-down"></i><i
+                                    *ngIf="(sortTypeActivities == 'Organizer.displayName') && !sortReverseActivities"
+                                    class="fa fa-angle-up"></i></th>
+                                <th class="col-xs-1" (click)="sortActivities('published')">Published<i
+                                    *ngIf="(sortTypeActivities == 'published') && sortReverseActivities"
+                                    class="fa fa-angle-down"></i><i
+                                    *ngIf="(sortTypeActivities == 'published') && !sortReverseActivities"
+                                    class="fa fa-angle-up"></i></th>
                                 <th class="col-xs-2"></th>
                             </tr>
                             </thead>
 
                             <tbody>
-<!--                            <tr ng-repeat="activity in activities | orderBy:sortTypeActivities:sortReverseActivities | filter:searchQueryActivities">-->
+                            <!--                            <tr ng-repeat="activity in activities | orderBy:sortTypeActivities:sortReverseActivities | filter:searchQueryActivities">-->
                             <tr *ngFor="let activity of archive |
                                     filter : activityCallback : searchQueryActivities |
                                     filter : activityDateFilter : date |
@@ -64,10 +89,12 @@
                                 <td>{{activity.date | date:'yyyy-MM-dd'}}</td>
                                 <td>{{activity.Organizer.displayName}}</td>
                                 <td class="manage-table-action">
-                                    <a *ngIf="activity.published" class="btn btn-link" (click)="togglePublishedActivity(activity)">
+                                    <a *ngIf="activity.published" class="btn btn-link"
+                                       (click)="togglePublishedActivity(activity)">
                                         <i class="fa fa-toggle-on text-success"></i>
                                     </a>
-                                    <a *ngIf="!activity.published" class="btn btn-link" (click)="togglePublishedActivity(activity)">
+                                    <a *ngIf="!activity.published" class="btn btn-link"
+                                       (click)="togglePublishedActivity(activity)">
                                         <i class="fa fa-toggle-off text-warning"></i>
                                     </a>
                                 </td>
@@ -88,11 +115,12 @@
 
             </div>
 
-            <div class="tab-pane" id="users">
+            <div class="tab-pane" id="users" *ngIf="user.isAdmin">
 
                 <div class="row section manage-actions">
                     <div class="col-xs-12 col-sm-6 col-md-3 col-sm-offset-6 col-md-offset-9">
-                        <input type="text" class="form-control" placeholder="Search users" [(ngModel)]="searchQueryUsers">
+                        <input type="text" class="form-control" placeholder="Search users"
+                               [(ngModel)]="searchQueryUsers">
                     </div>
                 </div>
 
@@ -102,9 +130,20 @@
 
                             <thead>
                             <tr>
-                                <th class="col-xs-5" (click)="sortUsers('displayName')">Name<i *ngIf="(sortTypeUsers == 'displayName') && sortReverseUsers" class="fa fa-angle-down"></i><i *ngIf="(sortTypeUsers == 'displayName') && !sortReverseUsers" class="fa fa-angle-up"></i></th>
-                                <th class="col-xs-4" (click)="sortUsers('email')">Email<i *ngIf="(sortTypeUsers == 'email') && sortReverseUsers" class="fa fa-angle-down"></i><i *ngIf="(sortTypeUsers == 'email') && !sortReverseUsers" class="fa fa-angle-up"></i></th>
-                                <th class="col-xs-1" (click)="sortUsers('isAdmin')">Admin<i *ngIf="(sortTypeUsers == 'isAdmin') && sortReverseUsers" class="fa fa-angle-down"></i><i *ngIf="(sortTypeUsers == 'isAdmin') && !sortReverseUsers" class="fa fa-angle-up"></i></th>
+                                <th class="col-xs-5" (click)="sortUsers('displayName')">Name<i
+                                    *ngIf="(sortTypeUsers == 'displayName') && sortReverseUsers"
+                                    class="fa fa-angle-down"></i><i
+                                    *ngIf="(sortTypeUsers == 'displayName') && !sortReverseUsers"
+                                    class="fa fa-angle-up"></i></th>
+                                <th class="col-xs-4" (click)="sortUsers('email')">Email<i
+                                    *ngIf="(sortTypeUsers == 'email') && sortReverseUsers" class="fa fa-angle-down"></i><i
+                                    *ngIf="(sortTypeUsers == 'email') && !sortReverseUsers" class="fa fa-angle-up"></i>
+                                </th>
+                                <th class="col-xs-1" (click)="sortUsers('isAdmin')">Admin<i
+                                    *ngIf="(sortTypeUsers == 'isAdmin') && sortReverseUsers"
+                                    class="fa fa-angle-down"></i><i
+                                    *ngIf="(sortTypeUsers == 'isAdmin') && !sortReverseUsers"
+                                    class="fa fa-angle-up"></i></th>
                                 <th class="col-xs-2"></th>
                             </tr>
                             </thead>
@@ -113,7 +152,7 @@
                             <tr *ngFor="let user of users |
                                     filter : userCallback : searchQueryUsers |
                                     sort   : sortTypeUsers : typeSortMap.get(sortTypeUsers) : sortReverseUsers">
-<!--                            <tr ng-repeat="user in users | orderBy:sortTypeUsers:sortReverseUsers | filter:searchQueryUsers">-->
+                                <!--                            <tr ng-repeat="user in users | orderBy:sortTypeUsers:sortReverseUsers | filter:searchQueryUsers">-->
                                 <td><a href="/user/{{user.id}}">{{user.displayName}}</a></td>
                                 <td>{{user.email}}</td>
                                 <td *ngIf="user.isAdmin"><i class="fa fa-check"></i></td>
@@ -135,11 +174,12 @@
 
             </div>
 
-            <div class="tab-pane" id="groups">
+            <div class="tab-pane" id="groups" *ngIf="user.isAdmin">
 
                 <div class="row section manage-actions">
                     <div class="col-xs-12 col-sm-6 col-md-3 col-sm-offset-6 col-md-offset-9">
-                        <input type="text" class="form-control" placeholder="Search groups" [(ngModel)]="searchQueryGroups">
+                        <input type="text" class="form-control" placeholder="Search groups"
+                               [(ngModel)]="searchQueryGroups">
                     </div>
                 </div>
 
@@ -149,9 +189,21 @@
 
                             <thead>
                             <tr>
-                                <th class="col-xs-5" (click)="sortGroups('fullName')">Name<i *ngIf="(sortTypeGroups == 'fullName') && sortReverseGroups" class="fa fa-angle-down"></i><i *ngIf="(sortTypeGroups == 'fullName') && !sortReverseGroups" class="fa fa-angle-up"></i></th>
-                                <th class="col-xs-4" (click)="sortGroups('email')">Email<i *ngIf="(sortTypeGroups == 'email') && sortReverseGroups" class="fa fa-angle-down"></i><i *ngIf="(sortTypeGroups == 'email') && !sortReverseGroups" class="fa fa-angle-up"></i></th>
-                                <th class="col-xs-1" (click)="sortGroups('canOrganize')">Organizer<i *ngIf="(sortTypeGroups == 'canOrganize') && sortReverseGroups" class="fa fa-angle-down"></i><i *ngIf="(sortTypeGroups == 'canOrganize') && !sortReverseGroups" class="fa fa-angle-up"></i></th>
+                                <th class="col-xs-5" (click)="sortGroups('fullName')">Name<i
+                                    *ngIf="(sortTypeGroups == 'fullName') && sortReverseGroups"
+                                    class="fa fa-angle-down"></i><i
+                                    *ngIf="(sortTypeGroups == 'fullName') && !sortReverseGroups"
+                                    class="fa fa-angle-up"></i></th>
+                                <th class="col-xs-4" (click)="sortGroups('email')">Email<i
+                                    *ngIf="(sortTypeGroups == 'email') && sortReverseGroups"
+                                    class="fa fa-angle-down"></i><i
+                                    *ngIf="(sortTypeGroups == 'email') && !sortReverseGroups"
+                                    class="fa fa-angle-up"></i></th>
+                                <th class="col-xs-1" (click)="sortGroups('canOrganize')">Organizer<i
+                                    *ngIf="(sortTypeGroups == 'canOrganize') && sortReverseGroups"
+                                    class="fa fa-angle-down"></i><i
+                                    *ngIf="(sortTypeGroups == 'canOrganize') && !sortReverseGroups"
+                                    class="fa fa-angle-up"></i></th>
                                 <th class="col-xs-2"></th>
                             </tr>
                             </thead>
@@ -160,7 +212,7 @@
                             <tr *ngFor="let group of groups
                                     | filter : groupCallback : searchQueryGroups
                                     | sort   : sortTypeGroups : typeSortMap.get(sortTypeGroups) : sortReverseGroups">
-<!--                            <tr ng-repeat="group in groups | orderBy:sortTypeGroups:sortReverseGroups | filter:searchQueryGroups">-->
+                                <!--                            <tr ng-repeat="group in groups | orderBy:sortTypeGroups:sortReverseGroups | filter:searchQueryGroups">-->
                                 <td><a href="/group/{{group.id}}">{{group.fullName}} ({{group.displayName}})</a></td>
                                 <td>{{group.email}}</td>
                                 <td *ngIf="group.canOrganize"><i class="fa fa-check"></i></td>
@@ -179,6 +231,68 @@
                         </table>
                     </div>
                 </div>
+            </div>
+
+
+            <div class="tab-pane" id="internships" *ngIf="user.isAdmin || isUserInAcquisition">
+
+                <div class="row section manage-actions">
+                    <div class="col-xs-12 col-sm-6 col-md-3 col-sm-offset-6 col-md-offset-9">
+                        <input type="text" class="form-control" placeholder="Search internships"
+                               [(ngModel)]="searchQueryInternships">
+                    </div>
+                </div>
+
+                <div class="row section">
+                    <div class="table-responsive col-xs-12">
+                        <table class="table table-hover">
+
+                            <thead>
+                            <tr>
+                                <th class="col-xs-5" (click)="sortInternships('title')">Title<i
+                                    *ngIf="(sortTypeInternships == 'title') && sortReverseInternships"
+                                    class="fa fa-angle-down"></i><i
+                                    *ngIf="(sortTypeInternships == 'title') && !sortReverseInternships"
+                                    class="fa fa-angle-up"></i></th>
+                                <th class="col-xs-4" (click)="sortGroups('companyName')">Company<i
+                                    *ngIf="(sortTypeInternships == 'companyName') && sortReverseInternships"
+                                    class="fa fa-angle-down"></i><i
+                                    *ngIf="(sortTypeInternships == 'companyName') && !sortReverseInternships"
+                                    class="fa fa-angle-up"></i></th>
+                                <th class="col-xs-1" (click)="sortGroups('educationLevel')">Education Level<i
+                                    *ngIf="(sortTypeInternships == 'educationLevel') && sortReverseInternships"
+                                    class="fa fa-angle-down"></i><i
+                                    *ngIf="(sortTypeInternships == 'educationLevel') && !sortReverseInternships"
+                                    class="fa fa-angle-up"></i></th>
+                                <th class="col-xs-2"></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr *ngFor="let internship of internships
+                                    | filter : internshipCallback : searchQueryInternships
+                                    | sort   : sortTypeInternships : typeSortMap.get(sortTypeInternships) : sortReverseInternships">
+                                <td><a href="/partners/internships/{{internship.id}}">{{internship.title}}</a></td>
+                                <td>{{internship.companyName}}</td>
+                                <td>{{internship.educationLevel}}</td>
+
+                                <td class="manage-table-action text-right">
+                                    <a class="btn btn-link" href="/manage/partners/internships/edit/{{internship.id}}">
+                                        <i class="fa fa-cog"></i>
+                                    </a>
+                                    <a class="btn btn-link"
+                                       href="/manage/partners/internships/delete/{{internship.id}}">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>

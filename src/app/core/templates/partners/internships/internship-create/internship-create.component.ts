@@ -44,7 +44,7 @@ export class InternshipCreateComponent implements OnInit {
             contactEmail: this.email,
             link: this.link,
             educationLevel: this.educationLevel,
-            category: this.categories
+            category: this.categories[0]
         }).subscribe(internship => {
             this.loading = false;
 

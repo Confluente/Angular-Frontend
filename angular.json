@@ -34,7 +34,7 @@
                             "node_modules/jquery/dist/jquery.min.js",
                             "src/assets/libraries/turn.min.js",
                             "src/assets/libraries/checkForMobileDevice.js",
-                            "src/assets/bootstrap/bootstrap.min.js"
+                            "src/assets/bootstrap/bootstrap.min.js",
                         ]
                     },
                     "configurations": {

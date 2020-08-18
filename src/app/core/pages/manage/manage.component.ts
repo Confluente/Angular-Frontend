@@ -14,16 +14,18 @@ export class ManageComponent implements OnInit {
 
     user: any;
     loading: boolean;
+    isUserInAcquisition = false;
     date = new Date().setDate((new Date()).getDate() - 1);
     archive: any[];
+
     users: any[];
     groups: any[];
     activities: any[];
+    internships: any[];
 
     sortTypeActivities = 'id';
     sortReverseActivities = false;
     searchQueryActivities = "";
-    sortCallbackActivities: any;
 
     sortTypeUsers = 'id';
     sortReverseUsers = false;
@@ -32,6 +34,10 @@ export class ManageComponent implements OnInit {
     sortTypeGroups = 'id';
     sortReverseGroups = false;
     searchQueryGroups = "";
+
+    sortTypeInternships = 'id';
+    sortReverseInternships = false;
+    searchQueryInternships = "";
 
     private datepicker: { open: boolean };
 
@@ -82,11 +88,23 @@ export class ManageComponent implements OnInit {
         this.authService.user.subscribe(user => {
             this.user = user;
 
+            if (!this.user.loggedIn) { return; }
+
             this.archive = this.activatedRoute.snapshot.data.allActivities;
 
             if (this.user.isAdmin) {
                 this.users = this.activatedRoute.snapshot.data.allUsers;
                 this.groups = this.activatedRoute.snapshot.data.allGroups;
+            }
+
+            for (const group of this.user.groups) {
+                if (group.email === "acquisition@hsaconfluente.nl") {
+                    this.isUserInAcquisition = true;
+                }
+            }
+
+            if (this.isUserInAcquisition || this.user.isAdmin) {
+                this.internships = this.activatedRoute.snapshot.data.allInternships;
             }
 
             this.loading = false;
@@ -121,6 +139,12 @@ export class ManageComponent implements OnInit {
             || group.email.toLowerCase().includes(query.toLowerCase());
     }
 
+    internshipCallback(internship, query) {
+        return internship.title.toLowerCase().includes(query.toLowerCase())
+            || internship.companyName.toLowerCase().includes(query.toLowerCase())
+            || internship.educationLevel.toLowerCase().includes(query.toLowerCase());
+    }
+
     // Ugly repeated code
     sortActivities(type) {
         if (this.sortTypeActivities === type) {
@@ -147,5 +171,14 @@ export class ManageComponent implements OnInit {
             this.sortReverseGroups = false;
         }
         this.sortTypeGroups = type;
+    }
+
+    sortInternships(type) {
+        if (this.sortTypeInternships === type) {
+            this.sortReverseInternships = !this.sortReverseInternships;
+        } else {
+            this.sortReverseInternships = false;
+        }
+        this.sortTypeInternships = type;
     }
 }
