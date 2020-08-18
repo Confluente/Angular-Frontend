@@ -18,10 +18,14 @@ export class CurrentUserResolverService implements Resolve<any> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
         return this.webRequestService.get("api/auth/").pipe(
             catchError(err => {
-                console.warn("User not logged in.");
-                return of({loggedIn: false, groups: null});
+                console.warn("User is not logged in.");
+                return of(err);
             }),
-            mergeMap((result: HttpResponse<any>) => {
+            mergeMap((result: any) => {
+                if (result.error === "Unauthorized") {
+                    return of({loggedIn: false, groups: null});
+                }
+
                 return this.usersService.get(result.body.id).pipe(first());
             })
         );
