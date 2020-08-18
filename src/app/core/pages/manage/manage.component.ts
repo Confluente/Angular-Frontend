@@ -59,7 +59,10 @@ export class ManageComponent implements OnInit {
         ['isAdmin', this.sortPipe.booleanSort],
         ['fullName', this.sortPipe.lexicographicSort],
         ['email', this.sortPipe.lexicographicSort],
-        ['canOrganize', this.sortPipe.booleanSort]
+        ['canOrganize', this.sortPipe.booleanSort],
+        ['title', this.sortPipe.lexicographicSort],
+        ['companyName', this.sortPipe.lexicographicSort],
+        ['educationLevel', this.sortPipe.lexicographicSort]
     ]);
 
     constructor(private activatedRoute: ActivatedRoute,
