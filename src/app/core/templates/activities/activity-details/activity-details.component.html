@@ -9,7 +9,7 @@
 
         <div *ngIf="isUserOrganizing" class="col-xs-6">
             <ol class="breadcrumb small text-right">
-                <li><a href="/manage/activities/{{activity.id}}"><b>Edit activity</b></a></li>
+                <li><a href="/manage/activities/edit/{{activity.id}}"><b>Edit activity</b></a></li>
                 <li *ngIf="isUserOrganizing && !activity.published">
                     <a (click)="publishActivity(activity)" href="/"><b>Publish Activity</b></a>
                 </li>

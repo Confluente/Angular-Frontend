@@ -48,7 +48,7 @@ export class ActivityEditComponent implements OnInit {
         this.user = this.activatedRoute.snapshot.data.currentUser;
 
         for (const group of this.user.groups) {
-            this.userGroups.push(group.displayName);
+            this.userGroups.push(group.fullName);
         }
 
         // formatting the form to inputs such that it can be interactive with angular

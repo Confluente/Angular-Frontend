@@ -110,8 +110,7 @@ export class ActivitiesService {
      * @returns submitted   edited activity (except the picture)
      */
     edit(activity, keepCurrent, coverImage) {
-        return this.webRequestService.put("api/activities/" + activity.id, activity,
-            {observe: 'response', withCredentials: true, responseType: 'text'})
+        return this.webRequestService.put("api/activities/" + activity.id, activity)
             .pipe(
                 map((res: HttpResponse<any>) => {
                     // TODO MAKE PICTURE EDITING WORK
@@ -123,6 +122,7 @@ export class ActivitiesService {
                     //         }
                     //     })
                     // }
+                    console.log(res);
                     return res.body;
                 }),
                 catchError(err => {
