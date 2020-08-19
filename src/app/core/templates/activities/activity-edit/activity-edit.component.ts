@@ -2,10 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ActivitiesService} from "../../../services/activities/activities.service";
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {DatePipe} from "@angular/common";
 
 @Component({
     selector: 'app-activity-edit',
     templateUrl: './activity-edit.component.html',
+    providers: [DatePipe],
     styleUrls: ['./activity-edit.component.css']
 })
 export class ActivityEditComponent implements OnInit {
@@ -26,7 +28,7 @@ export class ActivityEditComponent implements OnInit {
 
     // setting standard deadline for subscription deadline field
     deadline = {
-        subscriptionDeadline: new Date()
+        subscriptionDeadline: this.datePipe.transform(new Date(), "yyyy-MM-dd")
     };
 
     dateOptions = {
@@ -41,7 +43,8 @@ export class ActivityEditComponent implements OnInit {
 
     constructor(private activatedRoute: ActivatedRoute,
                 private activitiesService: ActivitiesService,
-                private formBuilder: FormBuilder) {
+                private formBuilder: FormBuilder,
+                private datePipe: DatePipe) {
         this.loading = true;
 
         this.uploadForm = this.formBuilder.group({
@@ -52,6 +55,7 @@ export class ActivityEditComponent implements OnInit {
     ngOnInit(): void {
         this.activity = this.activatedRoute.snapshot.data.activity;
         this.activity.organizer = this.activity.Organizer.fullName;
+        this.activity.date = this.datePipe.transform(this.activity.date, "yyyy-MM-dd");
 
         this.user = this.activatedRoute.snapshot.data.currentUser;
 

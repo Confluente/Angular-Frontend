@@ -83,7 +83,7 @@
                 <div id="activity-overview" class="list-group" *ngIf="!loading">
                     <a *ngFor="let act of acts" href="/activities/{{act.id}}" class="list-group-item">
                         <p class="h6">{{act.name}}</p>
-                        <p class="small">{{act.date | date:'EEEE MMMM dd'}}</p>
+                            <p class="small">{{act.date | date:'EEEE MMMM dd'}}</p>
                     </a>
                 </div>
                 <a href="/activities" class="btn btn-sm btn-link">See more activities</a>

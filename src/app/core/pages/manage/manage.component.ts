@@ -3,10 +3,12 @@ import {ActivatedRoute} from "@angular/router";
 import {ActivitiesService} from "../../services/activities/activities.service";
 import {FilterPipe} from "../../pipes/filter.pipe";
 import {SortPipe} from "../../pipes/sort.pipe";
+import {DatePipe} from "@angular/common";
 
 @Component({
     selector: 'app-manage',
     templateUrl: './manage.component.html',
+    providers: [DatePipe],
     styleUrls: ['./manage.component.css']
 })
 export class ManageComponent implements OnInit {
@@ -14,7 +16,7 @@ export class ManageComponent implements OnInit {
     user: any;
     loading: boolean;
     isUserInAcquisition = false;
-    date = new Date().setDate((new Date()).getDate() - 1);
+    date;
     archive: any[];
 
     users: any[];
@@ -67,12 +69,16 @@ export class ManageComponent implements OnInit {
     constructor(private activatedRoute: ActivatedRoute,
                 private activitiesService: ActivitiesService,
                 public filterPipe: FilterPipe,
-                public sortPipe: SortPipe) {
+                public sortPipe: SortPipe,
+                private datePipe: DatePipe) {
         this.loading = true;
 
         // Variables for tracking search & sorting in activities tab
         this.sortTypeActivities = 'id';
         this.sortReverseActivities = false;
+
+        const today = new Date();
+        this.date = this.datePipe.transform(new Date(today.setDate(today.getDate() - 1)), "yyyy-MM-dd");
 
         // Variables for tracking search & sorting in users tab
         this.sortTypeUsers = 'id';
@@ -115,10 +121,8 @@ export class ManageComponent implements OnInit {
     // Allow toggling the 'published' attribute of activities
     togglePublishedActivity(activityToBeToggled) {
         activityToBeToggled.published = !activityToBeToggled.published;
-        activityToBeToggled.organizer = activityToBeToggled.Organizer.displayName;
-        this.activitiesService.edit(activityToBeToggled, true, null).subscribe(res => {
-            return;
-        });
+        activityToBeToggled.organizer = activityToBeToggled.Organizer.fullName;
+        this.activitiesService.edit(activityToBeToggled, true, null).subscribe();
     }
 
     activityCallback(activity, query) {
@@ -154,6 +158,7 @@ export class ManageComponent implements OnInit {
             this.sortReverseActivities = false;
         }
         this.sortTypeActivities = type;
+        console.log(this.date);
     }
 
     sortUsers(type) {

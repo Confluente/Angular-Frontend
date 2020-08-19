@@ -2,10 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {ActivitiesService} from "../../../services/activities/activities.service";
 import {ActivatedRoute} from "@angular/router";
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {DatePipe} from "@angular/common";
 
 @Component({
     selector: 'app-activity-create',
     templateUrl: './activity-create.component.html',
+    providers: [DatePipe],
     styleUrls: ['./activity-create.component.css']
 })
 export class ActivityCreateComponent implements OnInit {
@@ -16,7 +18,7 @@ export class ActivityCreateComponent implements OnInit {
 
     // setting standard deadline for subscription deadline field
     deadline = {
-        subscriptionDeadline: new Date()
+        subscriptionDeadline: this.datePipe.transform(new Date(), "yyyy-MM-dd")
     };
 
     // setting standard inputs for subscription form (first two questions are mandatory)
@@ -30,7 +32,7 @@ export class ActivityCreateComponent implements OnInit {
     name: string;
     description: string;
     organizer: string;
-    date: any;
+    date = this.datePipe.transform(new Date(), "yyyy-MM-dd");
     startTime: string;
     endTime: string;
     location: string;
@@ -44,20 +46,14 @@ export class ActivityCreateComponent implements OnInit {
 
     datepicker = {open: false};
 
-    dateOptions = {
-        formatYear: 'yy',
-        maxDate: new Date().setFullYear(new Date().getFullYear() + 10), // maximum date for datepicker
-        minDate: new Date(), // minimum date for datepicker
-        startingDay: 1
-    };
-
     private empty: boolean;
     private wrongCharacters: boolean;
     user: any;
 
     constructor(private activitiesService: ActivitiesService,
                 private activatedRoute: ActivatedRoute,
-                private formBuilder: FormBuilder) {
+                private formBuilder: FormBuilder,
+                private datePipe: DatePipe) {
         this.loading = true;
 
         this.uploadForm = this.formBuilder.group({
