@@ -5,7 +5,7 @@
         <li class="active">Edit event</li>
     </ol>
 
-    <form class="form-horizontal">
+    <form class="form-horizontal" [formGroup]="uploadForm">
         <header>
             <h1>Edit event</h1>
         </header>
@@ -95,7 +95,7 @@
                                                                        [checked]="keepCurrent" type="checkbox">Keep
                                 current picture
                             </div>
-                            <input id="activityEdit-cover" type="file" accept=".jpeg,.jpg,.png" fileread="uploadme"/>
+                            <input id="activityEdit-cover" name="image" (change)="onFileSelect($event)" type="file" accept=".jpeg,.jpg,.png" [disabled]="keepCurrent"/>
                         </div>
                     </div>
                 </div>

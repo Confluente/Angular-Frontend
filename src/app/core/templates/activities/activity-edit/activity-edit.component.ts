@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ActivitiesService} from "../../../services/activities/activities.service";
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
     selector: 'app-activity-edit',
@@ -11,6 +12,8 @@ export class ActivityEditComponent implements OnInit {
 
     activity;
     user;
+
+    uploadForm: FormGroup;
 
     loading: boolean;
 
@@ -37,13 +40,18 @@ export class ActivityEditComponent implements OnInit {
     types = ["☰ text", "◉ multiple choice", "☑ checkboxes"];
 
     constructor(private activatedRoute: ActivatedRoute,
-                private activitiesService: ActivitiesService) {
+                private activitiesService: ActivitiesService,
+                private formBuilder: FormBuilder) {
         this.loading = true;
+
+        this.uploadForm = this.formBuilder.group({
+            image: 'No Image'
+        });
     }
 
     ngOnInit(): void {
         this.activity = this.activatedRoute.snapshot.data.activity;
-        this.activity.organizer = this.activity.Organizer.displayName;
+        this.activity.organizer = this.activity.Organizer.fullName;
 
         this.user = this.activatedRoute.snapshot.data.currentUser;
 
@@ -133,19 +141,28 @@ export class ActivityEditComponent implements OnInit {
         return alert(ErrorMessage);
     }
 
+    onFileSelect(event) {
+        if (event.target.files.length > 0) {
+            const file = event.target.files[0];
+            this.uploadForm.get('image').setValue(file);
+        } else {
+            this.uploadForm.get('image').setValue('No Image');
+        }
+    }
+
     submit() {
         this.loading = true;
 
         let changedCoverImage = false;
-        if (this.uploadme !== "Did not change image") {
+        if (this.uploadForm.get('image').value !== 'No Image' && !this.keepCurrent) {
             this.activity.hasCoverImage = true;
             changedCoverImage = true;
         }
 
         const fd = new FormData();
         if (changedCoverImage) {
-            // @ts-ignore
-            const [file] = $('#activityEdit-cover')[0].files;
+            const file = this.uploadForm.get('image').value;
+
             if (!file.type.startsWith('image/')) {
                 return this.wrongInput('Non-image formats are not supported as pictures for activities!');
             }
@@ -162,7 +179,7 @@ export class ActivityEditComponent implements OnInit {
                 }
             };
 
-            fd.append('image', file);
+            fd.append('image', this.uploadForm.get('image').value);
         }
 
         // Checks whether required fields are empty
@@ -232,7 +249,7 @@ export class ActivityEditComponent implements OnInit {
             this.activity.hasCoverImage = false;
         }
 
-        this.activitiesService.edit(this.activity, this.keepCurrent, fd).subscribe(result => {
+        this.activitiesService.edit(this.activity, this.keepCurrent, fd).subscribe((result) => {
             this.loading = false;
 
             // redirect to edited activity

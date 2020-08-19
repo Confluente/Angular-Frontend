@@ -92,12 +92,10 @@ export class ActivitiesService {
         return this.webRequestService.post("api/activities", activity).pipe(
             mergeMap((act: HttpResponse<any>) => {
                 if (act.body.hasCoverImage) {
-                    this.webRequestService.post("api/activities/pictures/" + act.body.id, coverImage)
-                        .subscribe(result => {
-                            return act.body;
-                        });
+                    this.webRequestService.post("api/activities/pictures/" + act.body.id, coverImage).subscribe();
+                    return of(act.body);
                 } else {
-                    return act.body;
+                    return of(act.body);
                 }
             }),
             catchError(err => {
@@ -118,18 +116,13 @@ export class ActivitiesService {
     edit(activity, keepCurrent, coverImage) {
         return this.webRequestService.put("api/activities/" + activity.id, activity)
             .pipe(
-                map((res: HttpResponse<any>) => {
-                    // TODO MAKE PICTURE EDITING WORK
-                    // if (!keepCurrent) {
-                    //     this.webRequestService.put("api/activities/pictures/" + activity.id, coverImage, {
-                    //         transformRequest: angular.identity,
-                    //         headers: {
-                    //             'Content-Type': undefined
-                    //         }
-                    //     })
-                    // }
-                    console.log(res);
-                    return res.body;
+                mergeMap((res: HttpResponse<any>) => {
+                    if (!keepCurrent) {
+                        this.webRequestService.put("api/activities/pictures/" + activity.id, coverImage).subscribe();
+                        return of(res.body);
+                    } else {
+                        return of(res.body);
+                    }
                 }),
                 catchError(err => {
                     console.error('ActivitiesService.edit: Error when editing activity with id: ' + activity.id);

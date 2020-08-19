@@ -9,9 +9,9 @@ import {FormBuilder, FormGroup} from '@angular/forms';
     styleUrls: ['./activity-create.component.css']
 })
 export class ActivityCreateComponent implements OnInit {
+
     loading = false;
 
-    uploadme: any = "No Image";
     uploadForm: FormGroup;
 
     // setting standard deadline for subscription deadline field
@@ -107,11 +107,6 @@ export class ActivityCreateComponent implements OnInit {
             arr.splice(fromIndex, 1);
             arr.splice(toIndex, 0, element);
         }
-    }
-
-    // function for using datepicker in form for creating activities
-    openDatePicker() {
-        this.datepicker.open = true;
     }
 
     wrongInput(ErrorMessage) {
