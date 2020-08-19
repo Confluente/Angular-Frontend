@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivitiesService} from "../../../services/activities/activities.service";
 import {ActivatedRoute} from "@angular/router";
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
     selector: 'app-activity-create',
@@ -11,6 +12,7 @@ export class ActivityCreateComponent implements OnInit {
     loading = false;
 
     uploadme: any = "No Image";
+    uploadForm: FormGroup;
 
     // setting standard deadline for subscription deadline field
     deadline = {
@@ -35,6 +37,7 @@ export class ActivityCreateComponent implements OnInit {
     participationFee: string;
     published: boolean;
     hasCoverImage: any;
+    image: any;
 
     // options for question types
     types = ["☰ text", "◉ multiple choice", "☑ checkboxes"];
@@ -53,8 +56,13 @@ export class ActivityCreateComponent implements OnInit {
     user: any;
 
     constructor(private activitiesService: ActivitiesService,
-                private activatedRoute: ActivatedRoute) {
+                private activatedRoute: ActivatedRoute,
+                private formBuilder: FormBuilder) {
         this.loading = true;
+
+        this.uploadForm = this.formBuilder.group({
+            image: 'No Image'
+        });
     }
 
     ngOnInit(): void {
@@ -111,19 +119,28 @@ export class ActivityCreateComponent implements OnInit {
         return alert(ErrorMessage);
     }
 
+    onFileSelect(event) {
+        if (event.target.files.length > 0) {
+            const file = event.target.files[0];
+            this.uploadForm.get('image').setValue(file);
+        } else {
+            this.uploadForm.get('image').setValue('No Image');
+        }
+    }
+
     // function called when a new activity is submitted
     submit() {
         this.loading = true;
 
         let hasCoverImage = false;
-        if (this.uploadme !== "No Image") {
+        if (this.uploadForm.get('image').value !== 'No Image') {
             hasCoverImage = true;
         }
 
         const fd = new FormData();
         if (hasCoverImage) {
-            // @ts-ignore
-            const file = $('#activityCreate-cover')[0].files[0];
+            const file = this.uploadForm.get('image').value;
+
             if (!file.type.startsWith('image/')) {
                 return this.wrongInput('Non-image formats are not supported as pictures for activities!');
             }
@@ -140,7 +157,7 @@ export class ActivityCreateComponent implements OnInit {
                 }
             };
 
-            fd.append('image', file);
+            fd.append('image', this.uploadForm.get('image').value);
         }
 
         // constructing standard activity object
@@ -187,8 +204,12 @@ export class ActivityCreateComponent implements OnInit {
                 let optionString = dataObj.options[0];
                 for (let i = 1; i < dataObj.options.length; i++) {
                     optionString += "#;#" + dataObj.options[i];
-                    if (dataObj.options[i].includes("#;#")) { this.wrongCharacters = true; }
-                    if (dataObj.options[i].includes("#,#")) { this.wrongCharacters = true; }
+                    if (dataObj.options[i].includes("#;#")) {
+                        this.wrongCharacters = true;
+                    }
+                    if (dataObj.options[i].includes("#,#")) {
+                        this.wrongCharacters = true;
+                    }
                 }
                 allOptions.push(optionString);
 
@@ -201,13 +222,19 @@ export class ActivityCreateComponent implements OnInit {
                     this.empty = true;
                 }
 
-                if (dataObj.fullQuestion.includes("#,#")) { this.wrongCharacters = true; }
-                if (dataObj.fullQuestion.includes("#;#")) { this.wrongCharacters = true; }
+                if (dataObj.fullQuestion.includes("#,#")) {
+                    this.wrongCharacters = true;
+                }
+                if (dataObj.fullQuestion.includes("#;#")) {
+                    this.wrongCharacters = true;
+                }
 
                 // Check whether choices of multiple choice questions are empty
                 if (dataObj.type !== "☰ text" && dataObj.type !== "name" && dataObj.type !== "TU/e email") {
                     for (const option of dataObj.options) {
-                        if (option === "" || !dataObj.options) { this.empty = true; }
+                        if (option === "" || !dataObj.options) {
+                            this.empty = true;
+                        }
                     }
                 }
             });
@@ -231,7 +258,7 @@ export class ActivityCreateComponent implements OnInit {
         }
 
         // create new activity from variables as put on the $scope by the form
-        this.activitiesService.create(fd, act).subscribe(activity => {
+        this.activitiesService.create(fd, act).subscribe((activity: any) => {
             this.loading = false;
 
             // redirect to new activity

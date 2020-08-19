@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {WebRequestService} from '../web-request.service';
 import {of} from "rxjs";
-import {catchError, map} from "rxjs/operators";
+import {catchError, map, mergeMap} from "rxjs/operators";
 import {HttpResponse} from "@angular/common/http";
 
 @Injectable({
@@ -86,13 +86,19 @@ export class ActivitiesService {
     /**
      * Function for submitting created activity to backend.
      * @param coverImage    The coverImage of the new activity.
-     * @returns activity    The object representing the activity.
+     * @param activity      The object representing the activity.
      */
     create(coverImage, activity) {
         return this.webRequestService.post("api/activities", activity).pipe(
-            map((res: HttpResponse<any>) => {
-                // TODO DO IMAGES
-                return res.body;
+            mergeMap((act: HttpResponse<any>) => {
+                if (act.body.hasCoverImage) {
+                    this.webRequestService.post("api/activities/pictures/" + act.body.id, coverImage)
+                        .subscribe(result => {
+                            return act.body;
+                        });
+                } else {
+                    return act.body;
+                }
             }),
             catchError(err => {
                 console.error('ActivitiesService.post: Error when creating activity.');

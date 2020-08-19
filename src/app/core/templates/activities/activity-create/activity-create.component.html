@@ -5,7 +5,7 @@
         <li class="active">Add event</li>
     </ol>
 
-    <form class="form-horizontal">
+    <form class="form-horizontal" [formGroup]="uploadForm">
         <header>
             <h1>Add event</h1>
         </header>
@@ -91,7 +91,7 @@
                         <label for="activityCreate-cover" class="col-xs-12 col-sm-2 col-md-5 control-label">Cover
                             image</label>
                         <div class="col-xs-12 col-sm-10 col-md-7">
-                            <input id="activityCreate-cover" type="file" accept=".jpeg,.jpg,.png" fileread="uploadme"/>
+                            <input id="activityCreate-cover" name="image" (change)="onFileSelect($event)" type="file" accept=".jpeg,.jpg,.png"/>
                         </div>
                     </div>
                 </div>

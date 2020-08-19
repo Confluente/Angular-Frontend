@@ -10,7 +10,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import { LoginComponent } from './core/pages/login/login.component';
 import { HomeComponent } from './core/pages/home/home.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AlumniComponent } from './core/pages/about/alumni/alumni.component';
 import { AssociationComponent } from './core/pages/about/association/association.component';
 import { CommitteesComponent } from './core/pages/about/committees/committees.component';
@@ -130,6 +130,7 @@ import { BaseComponent } from './core/base/base.component';
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
+        ReactiveFormsModule,
     ],
     providers: [
         CookieService,
