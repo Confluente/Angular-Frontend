@@ -21,7 +21,7 @@ export class AuthService {
                 alert(err.error.data);
                 return of();
             }))
-            .subscribe(response => {
+            .subscribe((_) => {
                 window.location.reload();
             });
     }
