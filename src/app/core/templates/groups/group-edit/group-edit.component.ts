@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {GroupsService} from "../../../services/groups/groups.service";
-import {FilterPipe} from "../../../pipes/filter.pipe";
 
 @Component({
     selector: 'app-group-edit',
@@ -25,8 +24,7 @@ export class GroupEditComponent implements OnInit {
     loading: boolean;
 
     constructor(private activatedRoute: ActivatedRoute,
-                private groupsService: GroupsService,
-                private filterPipe: FilterPipe) {
+                private groupsService: GroupsService) {
         this.loading = true;
     }
 

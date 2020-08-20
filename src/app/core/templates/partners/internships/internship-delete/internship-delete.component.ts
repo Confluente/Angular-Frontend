@@ -26,7 +26,7 @@ export class InternshipDeleteComponent implements OnInit {
         this.loading = true;
 
         // Delete the internship.
-        this.partnersService.deleteInternship(this.internship.id).subscribe(result => {
+        this.partnersService.deleteInternship(this.internship.id).subscribe((_) => {
             this.loading = false;
 
             // redirect to edited internship
