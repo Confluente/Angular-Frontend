@@ -49,4 +49,4 @@ Thumbs.db
 src/assets/img/activities/*.jpeg
 
 # secrets file
-src/environment.prod.ts
+src/environments/environment.prod.ts
