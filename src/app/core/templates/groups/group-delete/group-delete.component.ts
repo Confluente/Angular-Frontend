@@ -32,5 +32,4 @@ export class GroupDeleteComponent implements OnInit {
             window.location.href = "/manage";
         });
     }
-
 }
