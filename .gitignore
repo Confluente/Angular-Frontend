@@ -47,3 +47,6 @@ Thumbs.db
 
 # Database pictures
 src/assets/img/activities/*.jpeg
+
+# secrets file
+src/environment.prod.ts
