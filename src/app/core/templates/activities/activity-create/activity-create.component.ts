@@ -3,6 +3,7 @@ import {ActivitiesService} from "../../../services/activities/activities.service
 import {ActivatedRoute} from "@angular/router";
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {DatePipe} from "@angular/common";
+import {FilterPipe} from "../../../pipes/filter.pipe";
 
 @Component({
     selector: 'app-activity-create',
@@ -53,7 +54,8 @@ export class ActivityCreateComponent implements OnInit {
     constructor(private activitiesService: ActivitiesService,
                 private activatedRoute: ActivatedRoute,
                 private formBuilder: FormBuilder,
-                private datePipe: DatePipe) {
+                private datePipe: DatePipe,
+                private filterPipe: FilterPipe) {
         this.loading = true;
 
         this.uploadForm = this.formBuilder.group({
@@ -117,6 +119,10 @@ export class ActivityCreateComponent implements OnInit {
         } else {
             this.uploadForm.get('image').setValue('No Image');
         }
+    }
+
+    groupFilterCallback(group, query) {
+        return group.canOrganize === true;
     }
 
     // function called when a new activity is submitted

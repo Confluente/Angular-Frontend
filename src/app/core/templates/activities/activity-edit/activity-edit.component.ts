@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {ActivitiesService} from "../../../services/activities/activities.service";
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {DatePipe} from "@angular/common";
+import {FilterPipe} from "../../../pipes/filter.pipe";
 
 @Component({
     selector: 'app-activity-edit',
@@ -21,7 +22,6 @@ export class ActivityEditComponent implements OnInit {
 
     inputs = [];
 
-    uploadme = "Did not change image";
     keepCurrent = false;
 
     userGroups = [];
@@ -44,7 +44,8 @@ export class ActivityEditComponent implements OnInit {
     constructor(private activatedRoute: ActivatedRoute,
                 private activitiesService: ActivitiesService,
                 private formBuilder: FormBuilder,
-                private datePipe: DatePipe) {
+                private datePipe: DatePipe,
+                private filterPipe: FilterPipe) {
         this.loading = true;
 
         this.uploadForm = this.formBuilder.group({
@@ -54,13 +55,14 @@ export class ActivityEditComponent implements OnInit {
 
     ngOnInit(): void {
         this.activity = this.activatedRoute.snapshot.data.activity;
-        this.activity.organizer = this.activity.Organizer.fullName;
         this.activity.date = this.datePipe.transform(this.activity.date, "yyyy-MM-dd");
 
         this.user = this.activatedRoute.snapshot.data.currentUser;
 
         for (const group of this.user.groups) {
-            this.userGroups.push(group.fullName);
+            if (group.canOrganize) {
+                this.userGroups.push(group.fullName);
+            }
         }
 
         // formatting the form to inputs such that it can be interactive with angular
@@ -152,6 +154,10 @@ export class ActivityEditComponent implements OnInit {
         } else {
             this.uploadForm.get('image').setValue('No Image');
         }
+    }
+
+    groupFilterCallback(group, query) {
+        return group.canOrganize === true;
     }
 
     submit() {
