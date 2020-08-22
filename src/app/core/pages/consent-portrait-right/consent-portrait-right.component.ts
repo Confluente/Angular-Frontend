@@ -20,7 +20,10 @@ export class ConsentPortraitRightComponent implements OnInit {
     }
 
     submit() {
-        this.notificationsService.portraitRight(this.user.id, true);
+        this.notificationsService.portraitRight(this.user.id, true).subscribe(user => {
+            // redirect to home screen
+            window.location.href = "/home";
+        });
     }
 
 }

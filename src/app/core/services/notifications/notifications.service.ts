@@ -18,7 +18,7 @@ export class NotificationsService {
      * @param answer    The answer to set it to.
      */
     portraitRight(userId, answer) {
-        return this.webRequestService.put("api/notification/portraitRight/" + userId, {answer}).pipe(
+        return this.webRequestService.put("api/notifications/portraitRight/" + userId, {answer}).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),
