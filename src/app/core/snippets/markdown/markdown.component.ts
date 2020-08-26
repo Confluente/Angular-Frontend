@@ -12,7 +12,7 @@ import {
 @Component({
     // tslint:disable-next-line:component-selector
     selector: 'markdown',
-    template: '<pre [innerHTML]="data"></pre>',
+    template: '<div [innerHTML]="data"></div>',
     encapsulation: ViewEncapsulation.None
 })
 export class MarkdownComponent implements OnChanges {
