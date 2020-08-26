@@ -50,11 +50,11 @@
             <p id="frontpage-slogan" class="block hsa hidden-xs">Connecting Honors students</p>
 
             <ul class="row list-inline">
-<!--                <li class="bw"><a href="/partners/sponsors"><img class="img-logo" alt="CQM"-->
-<!--                                                                 src="./assets/img/logo_cqm.png"></a>-->
-<!--                </li>-->
-<!--                <li class="bw"><a href="/partners/sponsors/tno"><img class="img-logo" alt="TNO" id="tno-logo"-->
-<!--                                                                     src="./assets/img/logo_tno.png"></a></li>-->
+                <!--                <li class="bw"><a href="/partners/sponsors"><img class="img-logo" alt="CQM"-->
+                <!--                                                                 src="./assets/img/logo_cqm.png"></a>-->
+                <!--                </li>-->
+                <!--                <li class="bw"><a href="/partners/sponsors/tno"><img class="img-logo" alt="TNO" id="tno-logo"-->
+                <!--                                                                     src="./assets/img/logo_tno.png"></a></li>-->
                 <li class="bw"><a href="/partners/sponsors/dnb"><img class="img-logo" alt="De Nederlandsche Bank"
                                                                      src="./assets/img/logo_dnb.jpg"></a></li>
                 <li class="bw"><a href="/partners/sponsors">
@@ -85,7 +85,7 @@
                 <div id="activity-overview" class="list-group" *ngIf="!loading">
                     <a *ngFor="let act of acts" href="/activities/{{act.id}}" class="list-group-item">
                         <p class="h6">{{act.name}}</p>
-                            <p class="small">{{act.date | date:'EEEE MMMM dd'}}</p>
+                        <p class="small">{{act.date | date:'EEEE MMMM dd'}}</p>
                     </a>
                 </div>
                 <a href="/activities_overview" class="btn btn-sm btn-link">See more activities</a>

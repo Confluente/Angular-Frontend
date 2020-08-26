@@ -39,15 +39,6 @@ export class ManageComponent implements OnInit {
     sortReverseInternships = false;
     searchQueryInternships = "";
 
-    private datepicker: { open: boolean };
-
-    dateOptions = {
-        formatYear: 'yy',
-        maxDate: new Date().setFullYear(new Date().getFullYear() + 10), // maximum date for datepicker
-        minDate: new Date(), // minimum date for datepicker
-        startingDay: 1
-    };
-
     typeSortMap = new Map([
         ['id', this.sortPipe.numberSort],
         ['name', this.sortPipe.lexicographicSort],
@@ -85,8 +76,6 @@ export class ManageComponent implements OnInit {
         // Variables for tracking search & sorting in groups tab
         this.sortTypeGroups = 'id';
         this.sortReverseGroups = false;
-
-        this.datepicker = {open: false};
     }
 
     ngOnInit(): void {
@@ -156,7 +145,6 @@ export class ManageComponent implements OnInit {
             this.sortReverseActivities = false;
         }
         this.sortTypeActivities = type;
-        console.log(this.date);
     }
 
     sortUsers(type) {
