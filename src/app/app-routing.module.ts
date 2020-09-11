@@ -49,9 +49,6 @@ import {ConsentPortraitRightComponent} from "./core/pages/consent-portrait-right
 import {SubmittedRegistrationComponent} from "./core/pages/submitted-registration/submitted-registration.component";
 import {CompletedRegistrationComponent} from "./core/pages/completed-registration/completed-registration.component";
 import {CommitteesResolverService} from "./core/services/groups/committees-resolver.service";
-import {UserDeleteComponent} from "./core/templates/users/user-delete/user-delete.component";
-import {GroupDeleteComponent} from "./core/templates/groups/group-delete/group-delete.component";
-import {ActivityDeleteComponent} from "./core/templates/activities/activity-delete/activity-delete.component";
 import {ChangePasswordComponent} from "./core/templates/users/change-password/change-password.component";
 import {InternshipOverviewComponent} from "./core/templates/partners/internships/internship-overview/internship-overview.component";
 import {AllInternshipsResolverService} from "./core/services/partners/all-internships-resolver.service";
@@ -59,7 +56,6 @@ import {InternshipDetailsComponent} from "./core/templates/partners/internships/
 import {SpecificInternshipResolverService} from "./core/services/partners/specific-internship-resolver.service";
 import {InternshipCreateComponent} from "./core/templates/partners/internships/internship-create/internship-create.component";
 import {InternshipEditComponent} from "./core/templates/partners/internships/internship-edit/internship-edit.component";
-import {InternshipDeleteComponent} from "./core/templates/partners/internships/internship-delete/internship-delete.component";
 import {CurrentUserResolverService} from "./core/services/users/current-user-resolver.service";
 import {BaseComponent} from "./core/base/base.component";
 
@@ -105,11 +101,6 @@ const routes: Routes = [
                 component: ActivityEditComponent,
                 resolve: {activity: SpecificActivityResolverService}
             },
-            {
-                path: 'manage/activities/delete/:activityId',
-                component: ActivityDeleteComponent,
-                resolve: {activity: SpecificActivityResolverService}
-            },
 
             // Users
             {path: 'user/profile', component: UserDetailsComponent},
@@ -122,11 +113,6 @@ const routes: Routes = [
                     user: SpecificUserResolverService,
                     allGroups: AllGroupsResolverService
                 }
-            },
-            {
-                path: 'manage/users/delete/:userId',
-                component: UserDeleteComponent,
-                resolve: {user: SpecificUserResolverService}
             },
             {
                 path: 'manage/users/change_password/:userId',
@@ -145,10 +131,6 @@ const routes: Routes = [
                 }
             },
             {path: 'group/:groupId', component: GroupDetailsComponent, resolve: {group: SpecificGroupResolverService}},
-            {
-                path: 'manage/groups/delete/:groupId', component: GroupDeleteComponent,
-                resolve: {group: SpecificGroupResolverService}
-            },
 
             // Internships
             {
@@ -165,11 +147,6 @@ const routes: Routes = [
             {
                 path: 'manage/partners/internships/edit/:internshipId',
                 component: InternshipEditComponent,
-                resolve: {internship: SpecificInternshipResolverService}
-            },
-            {
-                path: 'manage/partners/internships/delete/:internshipId',
-                component: InternshipDeleteComponent,
                 resolve: {internship: SpecificInternshipResolverService}
             },
 

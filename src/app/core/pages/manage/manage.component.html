@@ -102,9 +102,14 @@
                                     <a class="btn btn-link" href="/manage/activities/edit/{{activity.id}}">
                                         <i class="fa fa-cog"></i>
                                     </a>
-                                    <a class="btn btn-link" href="/manage/activities/delete/{{activity.id}}">
+
+                                    <a class="btn btn-link" href="#del-act-{{activity.id}}" data-toggle="collapse">
                                         <i class="fa fa-trash-o"></i>
                                     </a>
+
+                                    <div id="del-act-{{activity.id}}" class="collapse">
+                                        <button class="btn btn-danger" (click)="deleteAct(activity)">Delete Permanently</button>
+                                    </div>
                                 </td>
                             </tr>
                             </tbody>
@@ -160,9 +165,13 @@
                                     <a class="btn btn-link" href="/manage/users/edit/{{user.id}}">
                                         <i class="fa fa-cog"></i>
                                     </a>
-                                    <a class="btn btn-link" href="/manage/users/delete/{{user.id}}">
+                                    <a class="btn btn-link" href="#del-user-{{user.id}}" data-toggle="collapse">
                                         <i class="fa fa-trash-o"></i>
                                     </a>
+
+                                    <div id="del-user-{{user.id}}" class="collapse">
+                                        <button class="btn btn-danger" (click)="deleteUser(user)">Delete Permanently</button>
+                                    </div>
                                 </td>
                             </tr>
                             </tbody>
@@ -219,9 +228,13 @@
                                     <a class="btn btn-link" href="/manage/groups/edit/{{group.id}}">
                                         <i class="fa fa-cog"></i>
                                     </a>
-                                    <a class="btn btn-link" href="/manage/groups/delete/{{group.id}}">
+                                    <a class="btn btn-link" href="#del-group-{{group.id}}" data-toggle="collapse">
                                         <i class="fa fa-trash-o"></i>
                                     </a>
+
+                                    <div id="del-group-{{group.id}}" class="collapse">
+                                        <button class="btn btn-danger" (click)="deleteGroup(group)">Delete Permanently</button>
+                                    </div>
                                 </td>
                             </tr>
                             </tbody>
@@ -278,10 +291,13 @@
                                     <a class="btn btn-link" href="/manage/partners/internships/edit/{{internship.id}}">
                                         <i class="fa fa-cog"></i>
                                     </a>
-                                    <a class="btn btn-link"
-                                       href="/manage/partners/internships/delete/{{internship.id}}">
+                                    <a class="btn btn-link" href="#del-internship-{{internship.id}}" data-toggle="collapse">
                                         <i class="fa fa-trash-o"></i>
                                     </a>
+
+                                    <div id="del-internship-{{internship.id}}" class="collapse">
+                                        <button class="btn btn-danger" (click)="deleteInternship(internship)">Delete Permanently</button>
+                                    </div>
                                 </td>
                             </tr>
                             </tbody>

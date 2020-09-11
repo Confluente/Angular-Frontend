@@ -4,6 +4,9 @@ import {ActivitiesService} from "../../services/activities/activities.service";
 import {SortPipe} from "../../pipes/sort.pipe";
 import {DatePipe} from "@angular/common";
 import {Title} from "@angular/platform-browser";
+import {UsersService} from "../../services/users/users.service";
+import {GroupsService} from "../../services/groups/groups.service";
+import {PartnersService} from "../../services/partners/partners.service";
 
 @Component({
     selector: 'app-manage',
@@ -60,6 +63,9 @@ export class ManageComponent implements OnInit {
     constructor(titleService: Title,
                 private activatedRoute: ActivatedRoute,
                 private activitiesService: ActivitiesService,
+                private usersService: UsersService,
+                private groupsService: GroupsService,
+                private partnersService: PartnersService,
                 public sortPipe: SortPipe,
                 private datePipe: DatePipe) {
         this.loading = true;
@@ -176,5 +182,26 @@ export class ManageComponent implements OnInit {
             this.sortReverseInternships = false;
         }
         this.sortTypeInternships = type;
+    }
+
+    // Delete functions
+    deleteAct(activity) {
+        this.activitiesService.delete(activity.id).subscribe();
+        this.archive.splice(this.archive.indexOf(activity), 1);
+    }
+
+    deleteUser(user) {
+        this.usersService.delete(user.id).subscribe();
+        this.users.splice(this.users.indexOf(user), 1);
+    }
+
+    deleteGroup(group) {
+        this.groupsService.delete(group.id).subscribe();
+        this.groups.splice(this.groups.indexOf(group), 1);
+    }
+
+    deleteInternship(internship) {
+        this.partnersService.deleteInternship(internship.id).subscribe();
+        this.internships.splice(this.internships.indexOf(internship), 1);
     }
 }

@@ -51,14 +51,10 @@ import { NotFoundComponent } from './core/pages/error_pages/not-found/not-found.
 import { ConsentPortraitRightComponent } from './core/pages/consent-portrait-right/consent-portrait-right.component';
 import { SubmittedRegistrationComponent } from './core/pages/submitted-registration/submitted-registration.component';
 import { CompletedRegistrationComponent } from './core/pages/completed-registration/completed-registration.component';
-import { UserDeleteComponent } from './core/templates/users/user-delete/user-delete.component';
-import { GroupDeleteComponent } from './core/templates/groups/group-delete/group-delete.component';
-import { ActivityDeleteComponent } from './core/templates/activities/activity-delete/activity-delete.component';
 import { ChangePasswordComponent } from './core/templates/users/change-password/change-password.component';
 import { InternshipCreateComponent } from './core/templates/partners/internships/internship-create/internship-create.component';
 import { InternshipEditComponent } from './core/templates/partners/internships/internship-edit/internship-edit.component';
 import { InternshipDetailsComponent } from './core/templates/partners/internships/internship-details/internship-details.component';
-import { InternshipDeleteComponent } from './core/templates/partners/internships/internship-delete/internship-delete.component';
 import { InternshipOverviewComponent } from './core/templates/partners/internships/internship-overview/internship-overview.component';
 import { FilterPipe } from './core/pipes/filter.pipe';
 import { SortPipe } from './core/pipes/sort.pipe';
@@ -111,14 +107,10 @@ import { BaseComponent } from './core/base/base.component';
         ConsentPortraitRightComponent,
         SubmittedRegistrationComponent,
         CompletedRegistrationComponent,
-        UserDeleteComponent,
-        GroupDeleteComponent,
-        ActivityDeleteComponent,
         ChangePasswordComponent,
         InternshipCreateComponent,
         InternshipEditComponent,
         InternshipDetailsComponent,
-        InternshipDeleteComponent,
         InternshipOverviewComponent,
         FilterPipe,
         SortPipe,
