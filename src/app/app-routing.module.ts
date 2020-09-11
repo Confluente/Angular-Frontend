@@ -213,6 +213,7 @@ const routes: Routes = [
             // Error pages
             {path: '403', component: ForbiddenComponent},
             {path: '404', component: NotFoundComponent},
+            { path: '**', redirectTo: '/home', pathMatch: 'full' }
         ]
     }
 ];
