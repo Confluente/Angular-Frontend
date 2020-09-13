@@ -185,7 +185,7 @@ export class ManageComponent implements OnInit {
     }
 
     // Delete functions
-    deleteAct(activity) {
+    deleteActivity(activity) {
         this.activitiesService.delete(activity.id).subscribe();
         this.archive.splice(this.archive.indexOf(activity), 1);
     }
