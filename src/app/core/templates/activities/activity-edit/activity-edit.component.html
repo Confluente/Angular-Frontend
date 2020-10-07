@@ -67,8 +67,8 @@
                         <label for="activityEdit-organize" class="col-xs-12 col-sm-2 col-md-5 control-label">Organized
                             by</label>
                         <div class="col-xs-12 col-sm-10 col-md-7">
-                            <select [(ngModel)]="activity.OrganizerId" [ngModelOptions]="{standalone: true}" class="form-control" id="activityEdit-organize">
-                                <option *ngFor="let group of user.groups | filter : groupFilterCallback : 'nonEmptyQuery'" [value]="group.id">{{group.fullName}}</option>
+                            <select [(ngModel)]="activity.organizer" [ngModelOptions]="{standalone: true}" class="form-control" id="activityEdit-organize">
+                                <option *ngFor="let group of user.groups | filter : groupFilterCallback : 'nonEmptyQuery'" [value]="group.fullName">{{group.fullName}}</option>
                             </select>
                         </div>
                     </div>

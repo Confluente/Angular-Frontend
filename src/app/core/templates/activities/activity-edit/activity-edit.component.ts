@@ -60,6 +60,7 @@ export class ActivityEditComponent implements OnInit {
     ngOnInit(): void {
         this.activity = this.activatedRoute.snapshot.data.activity;
         this.activity.date = this.datePipe.transform(this.activity.date, "yyyy-MM-dd");
+        this.activity.organizer = this.activity.Organizer.fullName;
 
         this.user = this.activatedRoute.snapshot.data.currentUser;
 
@@ -198,9 +199,7 @@ export class ActivityEditComponent implements OnInit {
         }
 
         // Checks whether required fields are empty
-        let empty = !this.activity.name || !this.activity.description || !this.activity.Organizer;
-
-        this.activity.organizer = this.activity.Organizer.fullName;
+        let empty = !this.activity.name || !this.activity.description || !this.activity.organizer;
 
         let wrongCharacters = false;
 
