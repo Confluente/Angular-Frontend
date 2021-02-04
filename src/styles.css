@@ -321,6 +321,17 @@ i.committee-text {
 
 /* BOARDS ------------------------------------------------------------------- */
 
+.board-credits {
+  position: absolute;
+  right: 0;
+  font-size: 13px;
+  height: auto;
+}
+
+.board-container_img{
+	position: relative;
+}
+
 .board-column {
   display: flex;
   width: 100%;
