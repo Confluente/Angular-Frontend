@@ -406,6 +406,12 @@ i.committee-text {
   line-height: 1.2em;
   font-weight: normal;
   height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.partner-text__header{
+  justify-content: center;
 }
 
 .partner-footer {
