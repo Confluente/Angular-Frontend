@@ -431,6 +431,12 @@ i.committee-text {
   content: "\f141";
 }
 
+/* Sister Associations Titles */
+.partner-text h1 {
+    text-align: center;
+    transform: translate(0, 80%);
+}
+
 /* EVENTS ------------------------------------------------------------------- */
 
 #activity-details .fa {
