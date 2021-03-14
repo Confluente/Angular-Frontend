@@ -60,6 +60,10 @@ import {CurrentUserResolverService} from "./core/services/users/current-user-res
 import {BaseComponent} from "./core/base/base.component";
 import {OptiverComponent} from "./core/pages/partners/sponsors/optiver/optiver.component";
 
+import {RiddleComponent} from "./core/pages/candi-riddle/riddle/riddle.component";
+import {RiddleComponent1} from "./core/pages/candi-riddle/riddle1/riddle1.component";
+import {RiddleComponent2} from "./core/pages/candi-riddle/riddle2/riddle2.component";
+
 const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
     {
@@ -195,6 +199,12 @@ const routes: Routes = [
             {path: 'consent_portrait_right', component: ConsentPortraitRightComponent},
             {path: 'submitted_registration', component: SubmittedRegistrationComponent},
             {path: 'completed_registration', component: CompletedRegistrationComponent},
+			
+			//Digital-RiddleCandi page
+            {path: 'RiddleAnswerARiddleAnswerB', component: RiddleComponent},
+			{path: 'TopThree', component: RiddleComponent1},
+			{path: 'oTpTrehe', component: RiddleComponent2},
+            
 
             // Error pages
             {path: '403', component: ForbiddenComponent},
