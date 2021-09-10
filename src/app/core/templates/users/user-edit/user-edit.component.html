@@ -80,7 +80,7 @@
                     <div class="form-group">
                         <label for="userCreate-personalEmail" class="col-xs-12 col-sm-3 control-label">Personal Email address</label>
                         <div class="col-xs-12 col-sm-9">
-                            <input placeholder="@anyemail.com" type="email" [(ngModel)]="personalEmail" class="form-control" id="userCreate-personalEmail" required [ngModelOptions]="{standalone: true}">
+                            <input placeholder="@anyemail.com" type="email" [(ngModel)]="user.personalEmail" class="form-control" id="userCreate-personalEmail" required [ngModelOptions]="{standalone: true}">
                         </div>
                     </div>
 
@@ -98,7 +98,7 @@
                     <div class="form-group">
                         <label for="userCreate-dob" class="col-xs-12 col-sm-3 control-label">Date of birth</label>
                         <div class="col-xs-12 col-sm-9">
-                            <input type="date" [(ngModel)]="dob" class="form-control" id="userCreate-dob" [ngModelOptions]="{standalone: true}">
+                            <input type="date" [(ngModel)]="user.dob" class="form-control" id="userCreate-dob" [ngModelOptions]="{standalone: true}">
                         </div>
                     </div>
 
