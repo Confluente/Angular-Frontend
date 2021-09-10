@@ -56,6 +56,7 @@ export class ManageComponent implements OnInit {
         ['Organizer.displayName', this.sortPipe.lexicographicSort],
         ['published', this.sortPipe.booleanSort],
         ['displayName', this.sortPipe.lexicographicSort],
+        ['honorsGeneration', this.sortPipe.numberSort],
         ['email', this.sortPipe.lexicographicSort],
         ['role.name', this.sortPipe.lexicographicSort],
         ['fullName', this.sortPipe.lexicographicSort],

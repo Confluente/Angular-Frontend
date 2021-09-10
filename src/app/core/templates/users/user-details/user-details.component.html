@@ -14,6 +14,14 @@
                 <td><b>TU/e email</b></td>
                 <td>{{user.email}}</td>
             </tr>
+            <tr *ngIf="user.personalEmail">
+                <td><b>Personal email</b></td>
+                <td>{{user.personalEmail}}</td>
+            </tr>
+            <tr *ngIf="user.dob">
+                <td><b>Date of Birth</b></td>
+                <td>{{user.dob}}</td>
+            </tr>
             <tr *ngIf="user.major">
                 <td><b>Major</b></td>
                 <td>{{user.major}}</td>
@@ -45,6 +53,10 @@
             <tr>
                 <td><b>Consent to portrait right</b></td>
                 <td>{{user.consentWithPortraitRight}}</td>
+            </tr>
+            <tr>
+                <td><b>Consent to store the date of birth</b></td>
+                <td>{{user.consentWithDOBRight}}</td>
             </tr>
         </table>
     </div>

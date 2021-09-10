@@ -17,15 +17,17 @@ export class UserCreateComponent implements OnInit {
         "Smart Cities", "Smart Mobility", "Master Honors"];
 
     // Different generations in which students can say that started at honors academy
-    generations = [2016, 2017, 2018, 2019, 2020];
+    generations = [2016, 2017, 2018, 2019, 2020, 2021];
 
     // Different membership statuses
     memberships = ["Member", "Alumni", "Associate member"];
 
     // declare form fields for ng model bindings
     email;
+    personalEmail;
     firstName;
     lastName;
+    dob;
     membership;
     major;
     address;
@@ -35,6 +37,7 @@ export class UserCreateComponent implements OnInit {
     phone;
     password;
     portraitRight;
+    DOBRight;
 
     constructor(titleService: Title,
                 private usersService: UsersService) {
@@ -62,8 +65,10 @@ export class UserCreateComponent implements OnInit {
 
         this.usersService.create({
             email: this.email,
+            personalEmail: this.personalEmail,
             firstName: this.firstName,
             lastName: this.lastName,
+            dob: this.dob,
             honorsMembership: this.membership,
             major: this.major,
             address: this.address,
@@ -72,7 +77,8 @@ export class UserCreateComponent implements OnInit {
             campusCardNumber: this.cardNumber,
             mobilePhoneNumber: this.phone,
             password: this.password,
-            consentWithPortraitRight: this.portraitRight
+            consentWithPortraitRight: this.portraitRight,
+            consentWithDOBRight: this.DOBRight
         }).subscribe(activity => {
             this.loading = false;
 

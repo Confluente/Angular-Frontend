@@ -15,7 +15,7 @@
                 <div class="col-xs-12 col-md-8 col-lg-6">
 
                     <div class="form-group">
-                        <label for="userCreate-firstName" class="col-xs-12 col-sm-3 control-label">Name</label>
+                        <label for="userCreate-firstName" class="col-xs-12 col-sm-3 control-label">Name*</label>
                         <div class="col-xs-6 col-sm-4">
                             <input placeholder="First name" type="text" [(ngModel)]="firstName" class="form-control" id="userCreate-firstName" required [ngModelOptions]="{standalone: true}">
                         </div>
@@ -27,13 +27,13 @@
                 </div>
             </div>
 
-            <div class="clearfix"></div>
+            <div class="clearfix block"></div>
 
             <div class="row">
                 <div class="col-xs-12 col-md-8 col-lg-6">
 
                     <div class="form-group">
-                        <label for="userCreate-email" class="col-xs-12 col-sm-3 control-label">Email address</label>
+                        <label for="userCreate-email" class="col-xs-12 col-sm-3 control-label">TU/e Email address *</label>
                         <div class="col-xs-12 col-sm-9">
                             <input placeholder="@student.tue.nl" type="email" [(ngModel)]="email" class="form-control" id="userCreate-email" required [ngModelOptions]="{standalone: true}">
                         </div>
@@ -41,7 +41,7 @@
 
                 </div>
                 <p class="hidden-sm col-xs-12 col-md-4 control-label text-left small">
-                    Essential communication will proceed through email, as well as the promotion of events.
+                    Essential communication will proceed through your TU/e email, as well as the promotion of events.
                 </p>
             </div>
 
@@ -51,7 +51,7 @@
                 <div class="col-xs-12 col-md-8 col-lg-6">
 
                     <div class="form-group">
-                        <label for="userCreate-member" class="col-xs-12 col-sm-3 control-label">Membership</label>
+                        <label for="userCreate-member" class="col-xs-12 col-sm-3 control-label">Membership*</label>
                         <div class="col-xs-12 col-sm-9">
                             <select [(ngModel)]="membership" class="form-control" id="userCreate-member" [ngModelOptions]="{standalone: true}">
                                 <option *ngFor="let ms of memberships" [value]="ms">{{ms}}</option>
@@ -69,6 +69,63 @@
 
         <fieldset class="section">
             <legend class="h4 block">Additional information. This part is <span class="text-primary">optional</span>.</legend>
+            
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="userCreate-personalEmail" class="col-xs-12 col-sm-3 control-label">Personal Email address</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <input placeholder="@anyemail.com" type="email" [(ngModel)]="personalEmail" class="form-control" id="userCreate-personalEmail" required [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+
+                </div>
+                <p class="hidden-sm col-xs-12 col-md-4 control-label text-left small">
+                    Invitation to become an alumni of our association and invitations for future reunions will be sent via your personal email. 
+                </p>
+            </div>
+
+            <div class="clearfix block"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="userCreate-dob" class="col-xs-12 col-sm-3 control-label">Date of birth</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <input type="date" [(ngModel)]="dob" class="form-control" id="userCreate-dob" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+
+                </div>
+                
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row section">
+                <div class="bg-info small section block col-xs-12 col-md-7">
+                    <p>Do you allow your birthday to be shared with other Confluente members (in the shared calendar, in the weekly e-mail and/or in the Honors Room)?</p>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="form-group">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" [(ngModel)]="DOBRight" id="userCreate-consentDOB" [ngModelOptions]="{standalone: true}">Yes, I am okay with that.
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+           
+
+            <div class="clearfix block"></div>
+
 
             <div class="row">
                 <div class="col-xs-12 col-md-8 col-lg-6">
@@ -189,7 +246,7 @@
                 <div class="col-xs-12 col-md-8 col-lg-6">
 
                     <div class="form-group">
-                        <label for="userCreate-password" class="col-xs-12 col-sm-3 control-label">Password</label>
+                        <label for="userCreate-password" class="col-xs-12 col-sm-3 control-label">Password*</label>
                         <div class="col-xs-12 col-sm-9">
                             <input type="password" [(ngModel)]="password" class="form-control" id="userCreate-password" required [ngModelOptions]="{standalone: true}">
                         </div>

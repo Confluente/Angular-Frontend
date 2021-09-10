@@ -15,6 +15,8 @@ export class UserEditComponent implements OnInit {
     groups;
     loading: boolean;
     roles;
+    dob;
+    personalEmail;
 
     // Different tracks within the honors academy
     tracks = ["Artificial intelligence", "Competitive Programming and Problem Solving",
@@ -28,7 +30,7 @@ export class UserEditComponent implements OnInit {
     memberships = ["Member", "Alumni", "Associate member"];
 
     // Different generations in which students can say that started at honors academy
-    generations = [2016, 2017, 2018, 2019, 2020];
+    generations = [2016, 2017, 2018, 2019, 2020, 2021];
 
     // Different roles for users
     selectedRole: any = {name: "Super admin"};
