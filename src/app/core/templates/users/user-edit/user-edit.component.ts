@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {UsersService} from "../../../services/users/users.service";
+import {DatePipe} from "@angular/common";
 import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-user-edit',
     templateUrl: './user-edit.component.html',
+    providers: [DatePipe],
     styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent implements OnInit {
@@ -39,6 +41,7 @@ export class UserEditComponent implements OnInit {
 
     constructor(titleService: Title,
                 private activatedRoute: ActivatedRoute,
+                private datePipe: DatePipe,
                 private usersService: UsersService) {
         this.loading = true;
 
@@ -48,6 +51,7 @@ export class UserEditComponent implements OnInit {
     ngOnInit(): void {
         this.user = this.activatedRoute.snapshot.data.user;
         this.currentUser = this.activatedRoute.snapshot.data.currentUser;
+        this.currentUser.dob = this.datePipe.transform(this.currentUser.dob, "yyyy-MM-dd");
 
         if (this.currentUser.role.USER_MANAGE && this.currentUser.role.ROLE_MANAGE) {
             this.roles = {roles: this.activatedRoute.snapshot.data.allRoles};
