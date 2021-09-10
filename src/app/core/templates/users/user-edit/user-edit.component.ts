@@ -51,7 +51,7 @@ export class UserEditComponent implements OnInit {
     ngOnInit(): void {
         this.user = this.activatedRoute.snapshot.data.user;
         this.currentUser = this.activatedRoute.snapshot.data.currentUser;
-        this.currentUser.dob = this.datePipe.transform(this.currentUser.dob, "yyyy-MM-dd");
+        this.user.dob = this.datePipe.transform(this.user.dob, "yyyy-MM-dd");
 
         if (this.currentUser.role.USER_MANAGE && this.currentUser.role.ROLE_MANAGE) {
             this.roles = {roles: this.activatedRoute.snapshot.data.allRoles};
