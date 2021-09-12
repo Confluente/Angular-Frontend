@@ -73,7 +73,7 @@ export class UserCreateComponent implements OnInit {
             major: this.major,
             address: this.address,
             track: this.honorsTrack,
-            honorsGeneration: this.generation,
+            honorsGeneration: +this.generation,
             campusCardNumber: this.cardNumber,
             mobilePhoneNumber: this.phone,
             password: this.password,
