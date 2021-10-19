@@ -18,7 +18,7 @@ export class AuthService {
     login(email, password) {
         return this.webService.post("api/auth/login/", {email, password})
             .pipe(catchError(err => {
-                alert(err.error.data);
+                alert(err.error.error);
                 return of({});
             }))
             .subscribe((_) => {

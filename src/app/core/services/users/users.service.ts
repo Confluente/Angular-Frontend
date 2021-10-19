@@ -72,8 +72,8 @@ export class UsersService {
                 console.error('UsersService.create: Error when creating user in the backend.');
                 console.error(err);
 
-                if (err.status === 406) {
-                    return of({error: err.status, data: err.data});
+                if (err.status === 406 || err.status === 400) {
+                    return of({error: err.status, message: err.error.message});
                 }
 
                 return of({});
