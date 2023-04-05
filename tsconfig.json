@@ -12,18 +12,6 @@
     },
     {
       "path": "./tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/turn-js/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/turn-js/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/turn-js/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/turn-js/tsconfig.spec.json"
     }
   ]
 }
