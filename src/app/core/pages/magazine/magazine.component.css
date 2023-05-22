@@ -1,6 +1,10 @@
-#magazine_container {
+/* #magazine_container {
     height: calc(100vh - 8rem);
     overflow: hidden;
+} */
+
+.magazine_container {
+    text-align:center;
 }
 
 #magazine_notification {
